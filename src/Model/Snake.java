@@ -1,54 +1,68 @@
 package Model;
 
-import java.awt.Point;
-import java.util.Iterator;
+import Model.Cells.*;
 
-public class Snake implements Iterable<Point> {
-	private class SnakeIterator implements Iterator<Point> {
-		private SnakeCell Current;
+class Snake {
 
-		SnakeIterator(SnakeCell start) {
-			Current = start;
-		}
+	private SnakeCell head;
+	private SnakeCell tail;
+	private Direction direction;
+	private GameField field;
 
-		@Override
-		public boolean hasNext() {
-			return Current.getTail() == null;
-		}
+	public Snake(int xHead, int yHead, Direction direction, GameField field) {
+		head = (SnakeCell) CellFactory.createCell(CellTypes.SNAKE, xHead, yHead);
 
-		@Override
-		public Point next() {
-			Current = Current.getTail();
-			return Current.getHead().getCoordinates();
-		}
-	}
-
-	private SnakeCell Head;
-	private Direction Direction;
-
-	@Override
-	public Iterator<Point> iterator() {
-		return new SnakeIterator(Head);
-	}
-
-	public Snake(SnakeCell head, Direction direction) {
-		Head = head;
-		Direction = direction;
+		tail = head;
+		this.direction = direction;
+		this.field = field;
 	}
 
 	public Model.Direction getDirection() {
-		return Direction;
-	}
-
-	public void setDirection(Model.Direction direction) {
-		Direction = direction;
+		return direction;
 	}
 
 	public SnakeCell getHead() {
-		return Head;
+		return head;
 	}
 
-	public void setHead(SnakeCell head) {
-		Head = head;
+	public SnakeCell getTail() {
+		return tail;
+	}
+
+	public StepResult makeStep(Direction newDirection) {
+		if (newDirection != null)
+			this.direction = newDirection;
+		Point nextCell = head.getCoordinates().add(direction.getVector());
+		if (!field.isInField(nextCell) || field.getCell(nextCell) instanceof SnakeCell)
+			return StepResult.DIE;
+		if (field.getCell(nextCell) instanceof EmptyCell)
+			return moveTo(nextCell);
+		if (field.getCell(nextCell) instanceof FoodCell)
+			return moveAndEat(nextCell);
+
+		return null;
+	}
+
+	private StepResult moveTo(Point point) {
+		updateHead(point);
+		deleteTail();
+		return StepResult.NONE;
+	}
+
+	private StepResult moveAndEat(Point point) {
+		updateHead(point);
+		return StepResult.GROW;
+	}
+
+	private void updateHead(Point point) {
+		head = ((SnakeCell) CellFactory.createCell(CellTypes.SNAKE, point)).connectTo(head);
+
+		field.setCell(point, head);
+	}
+
+	private void deleteTail() {
+		field.setCell(tail.getCoordinates(), CellFactory.createCell(CellTypes.EMPTY, tail.getCoordinates()));
+		tail = tail.getPrev();
+		tail.setNext(null);
 	}
 }
