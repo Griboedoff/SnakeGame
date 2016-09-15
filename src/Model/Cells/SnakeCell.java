@@ -1,23 +1,21 @@
-package Model;
+package Model.Cells;
 
 public class SnakeCell extends BaseCell {
 	private SnakeCell prev;
 	private SnakeCell next;
 
-	public SnakeCell(int x, int y, SnakeCell nextOne) {
+	SnakeCell(int x, int y) {
 		super(x, y);
-		next = nextOne;
-		nextOne.prev = this;
 	}
 
-	public SnakeCell(Point point, SnakeCell nextOne) {
-		super(point);
-		next = nextOne;
-		nextOne.prev = this;
-	}
+//	public Point getCoordinates() {
+//		return super.getCoordinates();
+//	}
 
-	public Point getCoordinates() {
-		return super.getCoordinates();
+	public SnakeCell connectTo(SnakeCell to) {
+		next = to;
+		to.prev = this;
+		return this;
 	}
 
 	public SnakeCell getPrev() {
