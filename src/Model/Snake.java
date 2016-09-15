@@ -7,6 +7,7 @@ public class Snake {
 	private SnakeCell head;
     private SnakeCell tail;
 	private Direction direction;
+    private GameField field;
 
 	public Snake(int xHead, int yHead, Direction direction) {
 		head = new SnakeCell(xHead, yHead, null);
@@ -26,10 +27,39 @@ public class Snake {
 		return tail;
 	}
 
-	public void step(Direction newDirection) {
+	public StepResult step(Direction newDirection) {
         if (newDirection != null)
             this.direction = newDirection;
-        Point nextCell = head.sumWith(direction.getVector());
+        Point nextCell = head.getCoordinates().add(direction.getVector());
+		if (!field.coordinatesInField(nextCell) || field.getCell(nextCell) instanceof SnakeCell)
+            return StepResult.DIE;
+        if (field.getCell(nextCell) instanceof EmptyCell)
+            return moveTo(nextCell);
+        if (field.getCell(nextCell) instanceof FoodCell)
+            return moveAndEat(nextCell);
+        //TODO: throw
+        return null;
+    }
 
+    private StepResult moveTo(Point point) {
+        updateHead(point);
+        deleteTail();
+        return StepResult.NONE;
+    }
+
+    private StepResult moveAndEat(Point point) {
+        updateHead(point);
+        return StepResult.GROW;
+    }
+
+    private void updateHead(Point point) {
+        head = new SnakeCell(point, head);
+    }
+
+    private void deleteTail() {
+        tail = tail.getPrev();
+        if (tail == null)
+            //TODO: throw
+        tail.setNext(null);
     }
 }

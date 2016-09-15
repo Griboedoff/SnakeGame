@@ -1,15 +1,20 @@
 package Model;
 
-public class SnakeCell extends CellState{
+public class SnakeCell extends BaseCell {
 	private SnakeCell prev;
 	private SnakeCell next;
 
 	public SnakeCell(int x, int y, SnakeCell nextOne) {
 		super(x, y);
-		prev = nextOne;
+		next = nextOne;
 		nextOne.prev = this;
 	}
 
+	public SnakeCell(Point point, SnakeCell nextOne) {
+		super(point);
+		next = nextOne;
+		nextOne.prev = this;
+	}
 
 	public Point getCoordinates() {
 		return super.getCoordinates();
