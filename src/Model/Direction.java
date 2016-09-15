@@ -1,6 +1,6 @@
 package Model;
 
-enum Direction {
+public enum Direction {
 	UP, LEFT, DOWN, RIGHT;
 
 	public Point getVector() {
