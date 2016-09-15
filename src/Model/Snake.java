@@ -1,54 +1,35 @@
 package Model;
 
-import java.awt.Point;
 import java.util.Iterator;
 
-public class Snake implements Iterable<Point> {
-	private class SnakeIterator implements Iterator<Point> {
-		private SnakeCell Current;
+public class Snake {
 
-		SnakeIterator(SnakeCell start) {
-			Current = start;
-		}
+	private SnakeCell head;
+    private SnakeCell tail;
+	private Direction direction;
 
-		@Override
-		public boolean hasNext() {
-			return Current.getTail() == null;
-		}
-
-		@Override
-		public Point next() {
-			Current = Current.getTail();
-			return Current.getHead().getCoordinates();
-		}
-	}
-
-	private SnakeCell Head;
-	private Direction Direction;
-
-	@Override
-	public Iterator<Point> iterator() {
-		return new SnakeIterator(Head);
-	}
-
-	public Snake(SnakeCell head, Direction direction) {
-		Head = head;
-		Direction = direction;
+	public Snake(int xHead, int yHead, Direction direction) {
+		head = new SnakeCell(xHead, yHead, null);
+        tail = head;
+		this.direction = direction;
 	}
 
 	public Model.Direction getDirection() {
-		return Direction;
-	}
-
-	public void setDirection(Model.Direction direction) {
-		Direction = direction;
+		return direction;
 	}
 
 	public SnakeCell getHead() {
-		return Head;
+		return head;
 	}
 
-	public void setHead(SnakeCell head) {
-		Head = head;
+	public SnakeCell getTail() {
+		return tail;
 	}
+
+	public void step(Direction newDirection) {
+        if (newDirection != null)
+            this.direction = newDirection;
+        Point nextCell = head.sumWith(direction.getVector());
+
+    }
 }

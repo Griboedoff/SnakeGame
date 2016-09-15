@@ -10,18 +10,18 @@ public class GameField {
 				Field[i][j] = CellState.EMPTY;
 	}
 
-	private boolean checkCoordinates(int x, int y) {
+	private boolean coordinatesInField(int x, int y) {
 		return 0 < x && x < Field.length && 0 < y && y < Field[0].length;
 	}
 
 	public CellState getCell(int x, int y) throws IndexOutOfBoundsException {
-		if (!checkCoordinates(x, y))
+		if (!coordinatesInField(x, y))
 			throw new IndexOutOfBoundsException();
 		return Field[x][y];
 	}
 
 	public void setCell(int x, int y, CellState state) throws IndexOutOfBoundsException {
-		if (!checkCoordinates(x, y))
+		if (!coordinatesInField(x, y))
 			throw new IndexOutOfBoundsException();
 		Field[x][y] = state;
 	}

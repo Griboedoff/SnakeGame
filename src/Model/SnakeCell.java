@@ -1,40 +1,33 @@
 package Model;
 
-import java.awt.Point;
+public class SnakeCell extends CellState{
+	private SnakeCell prev;
+	private SnakeCell next;
 
-public abstract class SnakeCell {
-	private Point Coordinates;
-	private SnakeCell Head;
-	private SnakeCell Tail;
-
-	public SnakeCell(int x, int y, SnakeCell from) {
-		Coordinates = new Point(x, y);
-		Head = from;
-		from.Tail = this;
+	public SnakeCell(int x, int y, SnakeCell nextOne) {
+		super(x, y);
+		prev = nextOne;
+		nextOne.prev = this;
 	}
 
 
 	public Point getCoordinates() {
-		return Coordinates;
+		return super.getCoordinates();
 	}
 
-	public void setCoordinates(Point coordinates) {
-		Coordinates = coordinates;
+	public SnakeCell getPrev() {
+		return prev;
 	}
 
-	public SnakeCell getHead() {
-		return Head;
+	public void setPrev(SnakeCell prev) {
+		this.prev = prev;
 	}
 
-	public void setHead(SnakeCell head) {
-		Head = head;
+	public SnakeCell getNext() {
+		return next;
 	}
 
-	public SnakeCell getTail() {
-		return Tail;
-	}
-
-	public void setTail(SnakeCell tail) {
-		Tail = tail;
+	public void setNext(SnakeCell next) {
+		this.next = next;
 	}
 }
