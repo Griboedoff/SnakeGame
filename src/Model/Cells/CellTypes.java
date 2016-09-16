@@ -1,5 +1,6 @@
 package Model.Cells;
 
-public enum CellTypes {
+public enum CellTypes
+{
 	EMPTY, FOOD, SNAKE
 }

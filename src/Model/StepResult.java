@@ -1,6 +1,7 @@
 package Model;
 
-enum StepResult {
+enum StepResult
+{
 	NONE,
 	DIE,
 	GROW

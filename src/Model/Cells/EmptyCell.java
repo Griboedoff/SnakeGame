@@ -1,8 +1,10 @@
 package Model.Cells;
 
-public class EmptyCell extends BaseCell {
+public class EmptyCell extends BaseCell
+{
 
-	public EmptyCell(int x, int y) {
+	public EmptyCell(int x, int y)
+	{
 		super(x, y);
 	}
 }

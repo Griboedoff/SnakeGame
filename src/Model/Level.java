@@ -1,32 +1,37 @@
 package Model;
 
-import java.io.File;
 import java.io.Serializable;
 
-public class Level implements Serializable {
-	private int gameLownessMS;
+public class Level implements Serializable
+{
+	private Integer gameLownessMS;
+	private String name;
 	private GameField field;
 	private Snake snake;
 
-	public Level(int width, int height, int xSnake, int ySnake, String direction) {
+	public Level(int width, int height, int xSnake, int ySnake, String direction)
+	{
 		field = new GameField(width, height);
 		snake = new Snake(xSnake, ySnake, Direction.valueOf(direction), field);
-		gameLownessMS = 200;
 	}
 
-	public StepResult makeStep(Direction dir) {
+	public StepResult makeStep(Direction dir)
+	{
 		return snake.makeStep(dir);
 	}
 
-	public static Level CreateFromFile(File file) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int getGameLownessMS() {
+	public Integer getGameLownessMS()
+	{
 		return gameLownessMS;
 	}
 
-	public void setGameLownessMS(int gameLownessMS) {
+	public void setGameLownessMS(Integer gameLownessMS)
+	{
 		this.gameLownessMS = gameLownessMS;
+	}
+
+	public String getName()
+	{
+		return name;
 	}
 }

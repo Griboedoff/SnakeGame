@@ -1,10 +1,13 @@
 package Model;
 
-public enum Direction {
+public enum Direction
+{
 	UP, LEFT, DOWN, RIGHT;
 
-	public Point getVector() {
-		switch (this) {
+	public Point getVector()
+	{
+		switch (this)
+		{
 			case UP:
 				return new Point(0, 1);
 			case DOWN:
