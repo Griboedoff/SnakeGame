@@ -10,7 +10,6 @@ public class Level implements Serializable {
 	private GameField field;
 	private Snake snake;
 
-
 	public Level(int width, int height, int xSnake, int ySnake, String direction) {
 		field = new GameField(width, height);
 		snake = new Snake(xSnake, ySnake, Direction.valueOf(direction), field);
