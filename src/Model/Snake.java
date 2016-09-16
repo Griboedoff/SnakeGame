@@ -39,7 +39,6 @@ class Snake {
 			return moveTo(nextCell);
 		if (field.getCell(nextCell) instanceof FoodCell)
 			return moveAndEat(nextCell);
-
 		return null;
 	}
 
@@ -56,7 +55,6 @@ class Snake {
 
 	private void updateHead(Point point) {
 		head = ((SnakeCell) CellFactory.createCell(CellTypes.SNAKE, point)).connectTo(head);
-
 		field.setCell(point, head);
 	}
 
