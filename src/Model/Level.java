@@ -1,7 +1,5 @@
 package Model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.io.File;
 import java.io.Serializable;
 
@@ -22,7 +20,7 @@ public class Level implements Serializable {
 	}
 
 	public static Level CreateFromFile(File file) {
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	public int getGameLownessMS() {

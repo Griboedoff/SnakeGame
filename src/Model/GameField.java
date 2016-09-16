@@ -1,7 +1,6 @@
 package Model;
 
-import Model.Cells.BaseCell;
-import Model.Cells.EmptyCell;
+import Model.Cells.*;
 
 class GameField {
 	private BaseCell[][] Field;
