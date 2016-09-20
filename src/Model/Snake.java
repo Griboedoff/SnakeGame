@@ -10,6 +10,7 @@ class Snake implements Serializable
 	private SnakeCell tail;
 	private Direction direction;
 	private GameField field;
+	private int length;
 
 	Snake(int xHead, int yHead, Direction direction, GameField field)
 	{
@@ -17,24 +18,26 @@ class Snake implements Serializable
 		tail = head;
 		this.direction = direction;
 		this.field = field;
+        field.setCell(head.getCoordinates(), head);
 	}
 
-	public Model.Direction getDirection()
-	{
+	public Model.Direction getDirection() {
 		return direction;
 	}
 
-	public SnakeCell getHead()
-	{
+	public SnakeCell getHead() {
 		return head;
 	}
 
-	public SnakeCell getTail()
-	{
+	public SnakeCell getTail() {
 		return tail;
 	}
 
-	StepResult makeStep(Direction newDirection)
+	public int getLength() {
+        return length;
+    }
+
+	public StepResult makeStep(Direction newDirection) {
 	{
 		if (newDirection != null)
 			this.direction = newDirection;
@@ -48,27 +51,24 @@ class Snake implements Serializable
 		return null;
 	}
 
-	private StepResult moveTo(Point point)
-	{
+	private StepResult moveTo(Point point) {
 		updateHead(point);
 		deleteTail();
 		return StepResult.NONE;
 	}
 
-	private StepResult moveAndEat(Point point)
-	{
+	private StepResult moveAndEat(Point point) {
 		updateHead(point);
 		return StepResult.GROW;
 	}
 
-	private void updateHead(Point point)
-	{
-		head = CellFactory.createSnakeCell(point, head);
+	private void updateHead(Point point) {
+		head = ((SnakeCell) CellFactory.createCell(CellTypes.SNAKE, point)).connectTo(head);
 		field.setCell(point, head);
+        length++;
 	}
 
-	private void deleteTail()
-	{
+	private void deleteTail() {
 		field.setCell(tail.getCoordinates(), CellFactory.createCell(CellTypes.EMPTY, tail.getCoordinates()));
 		tail = tail.getPrev();
 		tail.setNext(null);
