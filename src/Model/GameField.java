@@ -3,7 +3,9 @@ package Model;
 import Model.Cells.BaseCell;
 import Model.Cells.EmptyCell;
 
-class GameField
+import java.io.Serializable;
+
+class GameField implements Serializable
 {
 	private BaseCell[][] Field;
 

@@ -1,7 +1,6 @@
 package Model.Infrastructure;
 
 import Model.Level;
-import com.google.gson.Gson;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -20,26 +19,22 @@ public class LevelRepo
 			throw new IllegalArgumentException(String.format("%s is not directory", path));
 	}
 
-	public Level getLevelFromJsonFile(String levelName)
+	public Level getLevelFromFile(String levelName) throws IOException, ClassNotFoundException
 	{
 		File[] levelsFiles = levelsDir.listFiles();
 		if (levelsFiles != null)
 			for (File levelFile : levelsFiles)
-				if (Objects.equals(levelFile.getName(), levelName + ".txt"))
-					try (BufferedReader br = new BufferedReader(new FileReader(levelFile)))
+				if (Objects.equals(levelFile.getName(), levelName + ".level"))
+					try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(levelFile)))
 					{
-						return new Gson().fromJson(br, Level.class);
-					} catch (IOException e)
-					{
-						e.printStackTrace();
+						return (Level) objectInputStream.readObject();
 					}
 		throw new IllegalArgumentException(String.format("%s not found", levelName));
 	}
 
-	public boolean saveLevel(Level level)
+	public boolean saveLevelToFile(Level level) throws IOException
 	{
-
-		String fileName = level.getName() + ".json";
+		String fileName = level.getName() + ".level";
 		Path path = Paths.get(levelsDir.getAbsolutePath(), fileName);
 		try
 		{
@@ -50,13 +45,9 @@ public class LevelRepo
 			return false;
 		}
 
-		try (FileWriter writer = new FileWriter(path.toString()))
+		try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path.toString())))
 		{
-			writer.write(new Gson().toJson(level));
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-			return false;
+			objectOutputStream.writeObject(level);
 		}
 		return true;
 	}

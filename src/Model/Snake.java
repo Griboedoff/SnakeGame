@@ -2,18 +2,18 @@ package Model;
 
 import Model.Cells.*;
 
-class Snake
-{
+import java.io.Serializable;
 
+class Snake implements Serializable
+{
 	private SnakeCell head;
 	private SnakeCell tail;
 	private Direction direction;
 	private GameField field;
 
-	public Snake(int xHead, int yHead, Direction direction, GameField field)
+	Snake(int xHead, int yHead, Direction direction, GameField field)
 	{
-		head = (SnakeCell) CellFactory.createCell(CellTypes.SNAKE, xHead, yHead);
-
+		head = CellFactory.createSnakeCell(xHead, yHead, null);
 		tail = head;
 		this.direction = direction;
 		this.field = field;
@@ -34,7 +34,7 @@ class Snake
 		return tail;
 	}
 
-	public StepResult makeStep(Direction newDirection)
+	StepResult makeStep(Direction newDirection)
 	{
 		if (newDirection != null)
 			this.direction = newDirection;
@@ -63,7 +63,7 @@ class Snake
 
 	private void updateHead(Point point)
 	{
-		head = ((SnakeCell) CellFactory.createCell(CellTypes.SNAKE, point)).connectTo(head);
+		head = CellFactory.createSnakeCell(point, head);
 		field.setCell(point, head);
 	}
 

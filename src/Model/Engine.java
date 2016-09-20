@@ -16,18 +16,13 @@ public class Engine
 		this.controller = controller;
 	}
 
-	private int getCurrentGameLownessMS()
-	{
-		return currentLevel.getGameLownessMS() == null ? defaultGameLownessMS : currentLevel.getGameLownessMS();
-	}
-
 	public void run() throws InterruptedException
 	{
 		StepResult stepResult = StepResult.NONE;
 		Direction direction = null;
 		while (true)
 		{
-			Thread.currentThread().wait(getCurrentGameLownessMS());
+			Thread.currentThread().wait(defaultGameLownessMS);
 			direction = controller.getNewDirection();
 			stepResult = currentLevel.makeStep(direction);
 		}
