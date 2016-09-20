@@ -23,23 +23,23 @@ class GameField {
 		return isInField(point.getX(), point.getY());
 	}
 
-	private BaseCell getCell(int x, int y) throws IndexOutOfBoundsException {
+	public BaseCell getCell(int x, int y) throws IndexOutOfBoundsException {
 		if (!isInField(x, y))
 			throw new IndexOutOfBoundsException();
 		return Field[y][x];
 	}
 
-	BaseCell getCell(Point point) {
+	public BaseCell getCell(Point point) {
 		return getCell(point.getX(), point.getY());
 	}
 
-	private void setCell(int x, int y, BaseCell state) throws IndexOutOfBoundsException {
+	public void setCell(int x, int y, BaseCell state) throws IndexOutOfBoundsException {
 		if (!isInField(x, y))
 			throw new IndexOutOfBoundsException();
 		Field[y][x] = state;
 	}
 
-	void setCell(Point p, BaseCell state) {
+	public void setCell(Point p, BaseCell state) {
 		setCell(p.getX(), p.getY(), state);
 	}
 }
