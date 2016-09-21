@@ -22,16 +22,6 @@ public class SnakeCell extends BaseCell
 		return prev;
 	}
 
-	public void setPrev(SnakeCell prev)
-	{
-		this.prev = prev;
-	}
-
-	public SnakeCell getNext()
-	{
-		return next;
-	}
-
 	public void setNext(SnakeCell next)
 	{
 		this.next = next;

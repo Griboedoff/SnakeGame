@@ -17,19 +17,19 @@ class GameField implements Serializable
 				Field[i][j] = new EmptyCell(j, i);
 	}
 
-	private int getWidth()
+	int getWidth()
 	{
 		return Field.length;
 	}
 
-	private int getHeight()
+	int getHeight()
 	{
 		return Field[0].length;
 	}
 
 	private boolean isInField(int x, int y)
 	{
-		return 0 < x && x < getWidth() && 0 < y && y < getHeight();
+		return 0 <= x && x < getWidth() && 0 <= y && y < getHeight();
 	}
 
 	boolean isInField(Point point)
@@ -37,7 +37,7 @@ class GameField implements Serializable
 		return isInField(point.getX(), point.getY());
 	}
 
-	private BaseCell getCell(int x, int y) throws IndexOutOfBoundsException
+	BaseCell getCell(int x, int y) throws IndexOutOfBoundsException
 	{
 		if (!isInField(x, y))
 			throw new IndexOutOfBoundsException();
@@ -49,7 +49,7 @@ class GameField implements Serializable
 		return getCell(point.getX(), point.getY());
 	}
 
-	private void setCell(int x, int y, BaseCell state) throws IndexOutOfBoundsException
+	void setCell(int x, int y, BaseCell state) throws IndexOutOfBoundsException
 	{
 		if (!isInField(x, y))
 			throw new IndexOutOfBoundsException();

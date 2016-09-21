@@ -1,6 +1,6 @@
 package Model;
 
-enum StepResult
+enum SnakeStepResult
 {
 	NONE,
 	DIE,

@@ -4,6 +4,7 @@ import Model.Cells.*;
 
 import java.io.Serializable;
 
+@SuppressWarnings("SameReturnValue")
 class Snake implements Serializable
 {
 	private SnakeCell head;
@@ -18,32 +19,26 @@ class Snake implements Serializable
 		tail = head;
 		this.direction = direction;
 		this.field = field;
-        field.setCell(head.getCoordinates(), head);
+		field.setCell(head.getCoordinates(), head);
 	}
 
-	public Model.Direction getDirection() {
-		return direction;
+	int getLength()
+	{
+		return length;
 	}
 
-	public SnakeCell getHead() {
+	SnakeCell getHead()
+	{
 		return head;
 	}
 
-	public SnakeCell getTail() {
-		return tail;
-	}
-
-	public int getLength() {
-        return length;
-    }
-
-	public StepResult makeStep(Direction newDirection) {
+	SnakeStepResult makeStep(Direction newDirection)
 	{
 		if (newDirection != null)
 			this.direction = newDirection;
 		Point nextCell = head.getCoordinates().add(direction.getVector());
 		if (!field.isInField(nextCell) || field.getCell(nextCell) instanceof SnakeCell)
-			return StepResult.DIE;
+			return SnakeStepResult.DIE;
 		if (field.getCell(nextCell) instanceof EmptyCell)
 			return moveTo(nextCell);
 		if (field.getCell(nextCell) instanceof FoodCell)
@@ -51,26 +46,31 @@ class Snake implements Serializable
 		return null;
 	}
 
-	private StepResult moveTo(Point point) {
+	private SnakeStepResult moveTo(Point point)
+	{
 		updateHead(point);
 		deleteTail();
-		return StepResult.NONE;
+		return SnakeStepResult.NONE;
 	}
 
-	private StepResult moveAndEat(Point point) {
+	private SnakeStepResult moveAndEat(Point point)
+	{
 		updateHead(point);
-		return StepResult.GROW;
+		return SnakeStepResult.GROW;
 	}
 
-	private void updateHead(Point point) {
+	private void updateHead(Point point)
+	{
 		head = ((SnakeCell) CellFactory.createCell(CellTypes.SNAKE, point)).connectTo(head);
 		field.setCell(point, head);
-        length++;
+		length++;
 	}
 
-	private void deleteTail() {
+	private void deleteTail()
+	{
 		field.setCell(tail.getCoordinates(), CellFactory.createCell(CellTypes.EMPTY, tail.getCoordinates()));
 		tail = tail.getPrev();
 		tail.setNext(null);
+		length--;
 	}
 }
