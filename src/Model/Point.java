@@ -23,6 +23,15 @@ public class Point implements Serializable
 		return y;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "Point{" +
+				"x=" + x +
+				", y=" + y +
+				'}';
+	}
+
 	Point add(Point other)
 	{
 		return new Point(x + other.x, y + other.y);

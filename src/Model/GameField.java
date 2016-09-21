@@ -1,6 +1,8 @@
 package Model;
 
 import Model.Cells.BaseCell;
+import Model.Cells.CellFactory;
+import Model.Cells.CellTypes;
 import Model.Cells.EmptyCell;
 
 import java.io.Serializable;
@@ -14,7 +16,7 @@ class GameField implements Serializable
 		Field = new BaseCell[height][width];
 		for (int i = 0; i < height; i++)
 			for (int j = 0; j < width; j++)
-				Field[i][j] = new EmptyCell(j, i);
+				Field[i][j] = CellFactory.createCell(CellTypes.EMPTY);
 	}
 
 	int getWidth()
@@ -37,6 +39,16 @@ class GameField implements Serializable
 		return isInField(point.getX(), point.getY());
 	}
 
+	int countEmptyCells()
+	{
+		int counter = 0;
+		for (int y = 0; y < getHeight(); y++)
+			for (int x = 0; x < getWidth(); x++)
+				if (getCell(x, y) instanceof EmptyCell)
+					counter++;
+		return counter;
+	}
+
 	BaseCell getCell(int x, int y) throws IndexOutOfBoundsException
 	{
 		if (!isInField(x, y))
@@ -56,8 +68,8 @@ class GameField implements Serializable
 		Field[y][x] = state;
 	}
 
-	void setCell(Point p, BaseCell state)
+	void setCell(Point p, BaseCell cell)
 	{
-		setCell(p.getX(), p.getY(), state);
+		setCell(p.getX(), p.getY(), cell);
 	}
 }

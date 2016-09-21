@@ -1,13 +1,21 @@
 package Model.Cells;
 
+import Model.Point;
+
 public class SnakeCell extends BaseCell
 {
 	private SnakeCell prev;
 	private SnakeCell next;
+	private Point coordinates;
 
 	SnakeCell(int x, int y)
 	{
-		super(x, y);
+		coordinates = new Point(x, y);
+	}
+
+	public Point getCoordinates()
+	{
+		return coordinates;
 	}
 
 	public SnakeCell connectTo(SnakeCell to)
