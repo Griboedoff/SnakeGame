@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public enum Direction implements Serializable
 {
-	UP, LEFT, DOWN, RIGHT;
+	UP, LEFT, DOWN, RIGHT, NONE;
 
 	public Point getVector()
 	{
@@ -18,7 +18,8 @@ public enum Direction implements Serializable
 				return new Point(1, 0);
 			case LEFT:
 				return new Point(-1, 0);
+			default:
+				return new Point(0, 0);
 		}
-		return null;
 	}
 }

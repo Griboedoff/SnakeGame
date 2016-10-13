@@ -1,4 +1,4 @@
-package Model.Infrastructure;
+package Infrastructure;
 
 import Model.Cells.SnakeCell;
 import Model.Direction;
@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class LevelRepoTest
+public class LevelSerializationTest
 {
 	private LevelRepo levelRepo;
 	private Path path;

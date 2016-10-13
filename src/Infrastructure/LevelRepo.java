@@ -1,4 +1,4 @@
-package Model.Infrastructure;
+package Infrastructure;
 
 import Model.Level;
 
@@ -32,7 +32,7 @@ public class LevelRepo
 		throw new IllegalArgumentException(String.format("%s not found", levelName));
 	}
 
-	public boolean saveLevelToFile(Level level) throws IOException
+	boolean saveLevelToFile(Level level) throws IOException
 	{
 		String fileName = level.getName() + ".level";
 		Path path = Paths.get(levelsDir.getAbsolutePath(), fileName);

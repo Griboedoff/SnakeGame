@@ -1,21 +1,34 @@
 package Model.Cells;
 
+import SwingGui.PainterVisitor;
+import Model.GameField;
 import Model.Point;
+import Model.Snake;
 
 public class SnakeCell extends BaseCell
 {
+
 	private SnakeCell prev;
 	private SnakeCell next;
 	private Point coordinates;
 
-	SnakeCell(int x, int y)
+	public SnakeCell(int x, int y)
 	{
 		coordinates = new Point(x, y);
+	}
+
+	public SnakeCell(Point p)
+	{
+		coordinates = p;
 	}
 
 	public Point getCoordinates()
 	{
 		return coordinates;
+	}
+
+	public SnakeCell()
+	{
 	}
 
 	public SnakeCell connectTo(SnakeCell to)
@@ -34,4 +47,17 @@ public class SnakeCell extends BaseCell
 	{
 		this.next = next;
 	}
+
+	@Override
+	public void affectSnake(Snake snake, GameField field)
+	{
+		snake.setAlive(false);
+	}
+
+	@Override
+	public void acceptVisitor(PainterVisitor v, int x, int y)
+	{
+		v.visitSnakeCell(this, x, y);
+	}
+
 }

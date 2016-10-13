@@ -1,34 +1,26 @@
 package Model;
 
-import Model.Cells.CellFactory;
 import Model.Cells.SnakeCell;
 
 import java.io.Serializable;
 
 @SuppressWarnings("SameReturnValue")
-class Snake implements Serializable
+public class Snake implements Serializable
 {
 	private SnakeCell head;
 	private SnakeCell tail;
-
-	public Direction getDirection()
-	{
-		return direction;
-	}
-
-	public void setDirection(Direction direction)
-	{
-		this.direction = direction;
-	}
-
 	private Direction direction;
 	private int length;
+	private boolean isAlive;
 
-	Snake(int xHead, int yHead, Direction direction)
+	boolean isAlive()
 	{
-		head = CellFactory.createSnakeCell(xHead, yHead, null);
-		tail = head;
-		this.direction = direction;
+		return isAlive;
+	}
+
+	public void setAlive(boolean alive)
+	{
+		isAlive = alive;
 	}
 
 	int getLength()
@@ -36,9 +28,21 @@ class Snake implements Serializable
 		return length;
 	}
 
-	public void setHead(SnakeCell head)
+	Direction getDirection()
 	{
-		this.head = head;
+		return direction;
+	}
+
+	void setDirection(Direction direction)
+	{
+		this.direction = direction;
+	}
+
+	public void setHead(SnakeCell newHead)
+	{
+		if (newHead != null)
+			newHead.connectTo(this.head);
+		this.head = newHead;
 		length++;
 	}
 
@@ -51,11 +55,38 @@ class Snake implements Serializable
 	{
 		this.tail = tail;
 		length--;
-
 	}
 
 	SnakeCell getHead()
 	{
 		return head;
 	}
+
+	public Point getNextMoveCell()
+	{
+		return head.getCoordinates().add(direction.getVector());
+	}
+
+	Snake(int xHead, int yHead, Direction direction)
+	{
+		head = new SnakeCell(xHead, yHead);
+		tail = head;
+		this.direction = direction;
+		isAlive = true;
+	}
+
+	public void updateHead(SnakeCell newHead)
+	{
+		newHead.connectTo(head);
+		head = newHead;
+		length++;
+	}
+
+	public void deleteTail()
+	{
+		tail = tail.getPrev();
+		tail.setNext(null);
+		length--;
+	}
+
 }

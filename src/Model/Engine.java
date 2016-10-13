@@ -1,19 +1,22 @@
 package Model;
 
-import Model.Controllers.Controller;
-import Model.Infrastructure.LevelRepo;
+import Infrastructure.ISnakeController;
+import Infrastructure.LevelRepo;
+import Infrastructure.IRenderer;
 
-class Engine
+public class Engine
 {
-	private int defaultGameLownessMS;
+	private int defaultGameLownessMS = 100;
 	private LevelRepo levelRepo;
 	private Level currentLevel;
-	private Controller controller;
+	private ISnakeController snakeController;
+	private IRenderer renderer;
 
-	public Engine(String pathToLevelRepo, Controller controller)
+	public Engine(String pathToLevelRepo, ISnakeController snakeController, IRenderer renderer)
 	{
 		levelRepo = new LevelRepo(pathToLevelRepo);
-		this.controller = controller;
+		this.snakeController = snakeController;
+		this.renderer = renderer;
 	}
 
 	private Level loadLevel(String levelName)
@@ -30,17 +33,14 @@ class Engine
 
 	public void run() throws InterruptedException
 	{
-		while (true)
+		currentLevel = new Level("1", 30, 40, 3, 4, Direction.UP);
+		while (!currentLevel.isOver())
 		{
-			Direction direction = controller.getNewDirection();
-			SnakeStepResult snakeStepResult = currentLevel.makeStep(direction);
-			if (snakeStepResult == SnakeStepResult.DIE)
-			{
-				currentLevel = loadLevel(currentLevel.getName());
-				if (currentLevel != null)
-					currentLevel.resetRandom();
-			}
-			Thread.currentThread().wait(defaultGameLownessMS);
+			Direction direction = snakeController.getNewDirection();
+			currentLevel.tick(direction);
+			renderer.renderLevel(currentLevel);
+			Thread.sleep(defaultGameLownessMS);
 		}
+		renderer.renderGameEnd(false);
 	}
 }

@@ -1,8 +1,8 @@
-package Model.Controllers;
+package Infrastructure;
 
 import Model.Direction;
 
-public interface Controller
+public interface ISnakeController
 {
 	Direction getNewDirection();
 }
