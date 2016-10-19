@@ -3,6 +3,7 @@ package SwingGui;
 import Model.Cells.EmptyCell;
 import Model.Cells.FoodCell;
 import Model.Cells.SnakeCell;
+import Model.Cells.WallCell;
 
 import java.awt.*;
 
@@ -30,7 +31,6 @@ public class PainterVisitor
 		graphics.fillRect(cellSize * x, cellSize * y, cellSize, cellSize);
 		graphics.setColor(Color.BLACK);
 		graphics.drawRect(cellSize * x, cellSize * y, cellSize, cellSize);
-
 	}
 
 	public void visitFoodCell(FoodCell cell, int x, int y)
@@ -40,4 +40,12 @@ public class PainterVisitor
 		graphics.setColor(Color.BLACK);
 		graphics.drawRect(cellSize * x, cellSize * y, cellSize, cellSize);
 	}
+
+	public void visitWallCell(WallCell cell, int x, int y)
+    {
+        graphics.setColor(new Color(47, 47, 17));
+        graphics.fillRect(cellSize * x, cellSize * y, cellSize, cellSize);
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(cellSize * x, cellSize * y, cellSize, cellSize);
+    }
 }

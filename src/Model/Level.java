@@ -40,6 +40,7 @@ public class Level implements Serializable
 	{
 		return field.getCell(x, y);
 	}
+	public void setFieldCell(int x, int y) { field.setCell();}
 
 	public int getSnakeLen()
 	{
