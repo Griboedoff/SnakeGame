@@ -4,12 +4,10 @@ public enum Types
 {
     EMPTY, FOOD, SNAKE, WALL;
 
-    /*public BaseCell getCellByName()
+    public BaseCell getCellByName()
     {
         switch (this)
         {
-            case EMPTY:
-                return new EmptyCell();
             case FOOD:
                 return new FoodCell();
             case SNAKE:
@@ -19,5 +17,5 @@ public enum Types
             default:
                 return new EmptyCell();
         }
-    }*/
+    }
 }

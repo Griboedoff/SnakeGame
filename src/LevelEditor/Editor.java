@@ -72,6 +72,7 @@ public class Editor
         Level res = new Level(name, size.getX(), size.getY(), snakeCoords.getX(), snakeCoords.getY(), direction);
         for (int x = 0; x < size.getX(); x++)
             for (int y = 0; y < size.getY(); y++)
-                res.setFieldCell()
+                res.setFieldCell(x, y, field[y][x].getCellByName());
+        return res;
     }
 }
