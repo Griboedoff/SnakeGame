@@ -11,6 +11,11 @@ public class EmptyCell extends BaseCell
 	{
 	}
 
+	public EmptyCell(int x, int y)
+	{
+		super(x, y);
+	}
+
 	@Override
 	public void affectSnake(Snake snake, GameField field)
 	{

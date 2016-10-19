@@ -1,8 +1,8 @@
 package Model.Cells;
 
-import SwingGui.PainterVisitor;
 import Model.GameField;
 import Model.Snake;
+import SwingGui.PainterVisitor;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -12,6 +12,10 @@ public abstract class BaseCell implements Serializable
 	public Color color;
 
 	BaseCell()
+	{
+	}
+
+	BaseCell(int x, int y)
 	{
 	}
 

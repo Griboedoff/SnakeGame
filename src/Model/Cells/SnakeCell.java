@@ -27,10 +27,6 @@ public class SnakeCell extends BaseCell
 		return coordinates;
 	}
 
-	public SnakeCell()
-	{
-	}
-
 	public SnakeCell connectTo(SnakeCell to)
 	{
 		next = to;

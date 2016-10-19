@@ -2,7 +2,7 @@ import Model.Engine;
 import SwingGui.SwingGUI;
 import SwingGui.SwingKeyListener;
 
-public class Main
+public class GameRunner
 {
 	public static void main(String[] args)
 	{

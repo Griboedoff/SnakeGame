@@ -9,7 +9,10 @@ import java.awt.*;
 
 public class FoodCell extends BaseCell
 {
-	public Color color = Color.RED;
+	public FoodCell(int x, int y)
+	{
+		super(x, y);
+	}
 
 	public FoodCell()
 	{

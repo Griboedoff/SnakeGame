@@ -9,7 +9,7 @@ public class GameField implements Serializable
 {
 	private BaseCell[][] field;
 
-	GameField(int width, int height)
+	public GameField(int width, int height)
 	{
 		field = new BaseCell[height][width];
 		for (int i = 0; i < height; i++)
@@ -47,7 +47,7 @@ public class GameField implements Serializable
 		return counter;
 	}
 
-	BaseCell getCell(int x, int y) throws IndexOutOfBoundsException
+	public BaseCell getCell(int x, int y) throws IndexOutOfBoundsException
 	{
 		if (!isInField(x, y))
 			throw new IndexOutOfBoundsException();

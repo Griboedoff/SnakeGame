@@ -1,26 +1,29 @@
 package Model.Cells;
 
-import SwingGui.PainterVisitor;
-import Model.Snake;
 import Model.GameField;
-import java.awt.*;
+import Model.Snake;
+import SwingGui.PainterVisitor;
 
 public class WallCell extends BaseCell
-{	public Color color = Color.BLACK;
+{
+	public WallCell(int x, int y)
+	{
+		super(x, y);
+	}
 
-    public WallCell()
-    {
-    }
+	public WallCell()
+	{
+	}
 
-    @Override
-    public void affectSnake(Snake snake, GameField field)
-    {
-        snake.setAlive(false);
-    }
+	@Override
+	public void affectSnake(Snake snake, GameField field)
+	{
+		snake.setAlive(false);
+	}
 
-    @Override
-    public void acceptVisitor(PainterVisitor v, int x, int y)
-    {
-        v.visitWallCell(this, x, y);
-    }
+	@Override
+	public void acceptVisitor(PainterVisitor v, int x, int y)
+	{
+		v.visitWallCell(this, x, y);
+	}
 }

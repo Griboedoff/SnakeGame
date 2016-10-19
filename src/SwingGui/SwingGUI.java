@@ -23,6 +23,7 @@ public class SwingGUI implements IRenderer, ISnakeController
 	{
 		frame = new LevelWindow("Snake");
 		frame.setSize(500, 500);
+		frame.setUndecorated(true);
 		frame.setVisible(true);
 		pressedKeys = new HashSet<>();
 	}
@@ -49,12 +50,20 @@ public class SwingGUI implements IRenderer, ISnakeController
 	{
 		if (frame.level != level)
 			frame.level = level;
-		frame.update(frame.getGraphics());
+		frame.updateField(frame.getGraphics());
 	}
 
 	@Override
 	public void renderGameEnd(boolean isCompleted)
 	{
+		frame.updateGameEnd(frame.getGraphics());
+		try
+		{
+			Thread.sleep(1000);
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
 		frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 	}
 }

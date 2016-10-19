@@ -13,7 +13,7 @@ public class PainterVisitor
 	private Graphics graphics;
 	private int cellSize;
 
-	PainterVisitor(Graphics graphics, int cellSize)
+	public PainterVisitor(Graphics graphics, int cellSize)
 	{
 		this.graphics = graphics;
 		this.cellSize = cellSize;
@@ -43,7 +43,7 @@ public class PainterVisitor
 
 	public void visitWallCell(WallCell cell, int x, int y)
     {
-        graphics.setColor(new Color(47, 47, 17));
+        graphics.setColor(new Color(150, 30, 90));
         graphics.fillRect(cellSize * x, cellSize * y, cellSize, cellSize);
         graphics.setColor(Color.BLACK);
         graphics.drawRect(cellSize * x, cellSize * y, cellSize, cellSize);
