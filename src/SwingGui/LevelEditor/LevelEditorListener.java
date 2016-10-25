@@ -4,6 +4,7 @@ import Model.Cells.EmptyCell;
 import Model.Cells.FoodCell;
 import Model.Cells.SnakeCell;
 import Model.Cells.WallCell;
+import Model.Direction;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,7 +16,10 @@ public class LevelEditorListener implements KeyListener, MouseListener
 {
 	private Point mouseLocation;
 	private Class<?> currentSelectedCellType;
+    public boolean levelDone;
 	public boolean needToSet;
+    public boolean needToChangeSize;
+    public Direction direction;
 
 	public Point getMouseLocation()
 	{
@@ -31,6 +35,10 @@ public class LevelEditorListener implements KeyListener, MouseListener
 	{
 		mouseLocation = new Point(0, 0);
 		currentSelectedCellType = EmptyCell.class;
+        needToSet = false;
+        needToChangeSize = false;
+        levelDone = false;
+        direction = Direction.UP;
 	}
 
 	@Override
@@ -53,10 +61,28 @@ public class LevelEditorListener implements KeyListener, MouseListener
 			case (KeyEvent.VK_E):
 				currentSelectedCellType = EmptyCell.class;
 				break;
-			case (KeyEvent.VK_LEFT):
+			case (KeyEvent.VK_F):
 				currentSelectedCellType = FoodCell.class;
 				break;
-		}
+            case (KeyEvent.VK_ENTER):
+                levelDone = true;
+                break;
+            case (KeyEvent.VK_SPACE):
+                needToChangeSize = true;
+                break;
+            case (KeyEvent.VK_UP):
+                direction = Direction.UP;
+                break;
+            case (KeyEvent.VK_DOWN):
+                direction = Direction.DOWN;
+                break;
+            case (KeyEvent.VK_LEFT):
+                direction = Direction.LEFT;
+                break;
+            case (KeyEvent.VK_RIGHT):
+                direction = Direction.RIGHT;
+                break;
+        }
 	}
 
 	@Override

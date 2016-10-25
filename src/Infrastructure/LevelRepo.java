@@ -32,7 +32,7 @@ public class LevelRepo
 		throw new IllegalArgumentException(String.format("%s not found", levelName));
 	}
 
-	boolean saveLevelToFile(Level level) throws IOException
+	public boolean saveLevelToFile(Level level) throws IOException
 	{
 		String fileName = level.getName() + ".level";
 		Path path = Paths.get(levelsDir.getAbsolutePath(), fileName);

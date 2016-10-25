@@ -34,6 +34,11 @@ public class LevelEditor
 		field = newField;
 	}
 
+	public void changeSize(Point p) throws IndexOutOfBoundsException
+    {
+        changeSize(p.getX(), p.getY());
+    }
+
 	public GameField getField()
 	{
 		return field;
