@@ -45,4 +45,9 @@ public class Point implements Serializable
 	{
 		return new Point(x + other.x, y + other.y);
 	}
+
+	public boolean isPositive()
+	{
+		return x > 0 && y > 0;
+	}
 }
