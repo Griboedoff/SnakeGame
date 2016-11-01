@@ -74,7 +74,8 @@ public class LevelEditorRunner
 
     private static void showNameErrorMessage(String name)
     {
-        //Окошко, которое говорит, что ты мудак и такое имя уже есть.
+        //Окошко, которое говорит, что такое имя уже есть.
+
     }
 
     private static Point inputPoint()
