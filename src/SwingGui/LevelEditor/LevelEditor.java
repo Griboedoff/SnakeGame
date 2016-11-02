@@ -51,7 +51,9 @@ public class LevelEditor
 
 	public void setCell(Point p, Class<?> cellClass)
 	{
-		BaseCell cell = null;
+		if (!field.isInField(p))
+			return;
+		BaseCell cell;
 		try
 		{
 			cell = (BaseCell) cellClass.getConstructor(int.class, int.class).newInstance(p.getX(), p.getY());

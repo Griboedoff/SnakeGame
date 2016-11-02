@@ -3,8 +3,10 @@ package Infrastructure;
 import Model.Cells.SnakeCell;
 import Model.Direction;
 import Model.Level;
-/*
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,4 +46,3 @@ public class LevelSerializationTest
 		Assert.assertTrue(deserialized.getSnakeLen() == testLevel.getSnakeLen());
 	}
 }
-*/
