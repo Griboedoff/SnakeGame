@@ -62,7 +62,7 @@ public class GameField implements Serializable
 	public void setCell(int x, int y, BaseCell state) throws IndexOutOfBoundsException
 	{
 		if (!isInField(x, y))
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException(String.format("x=%d y=%d", x,y));
 		field[y][x] = state;
 	}
 

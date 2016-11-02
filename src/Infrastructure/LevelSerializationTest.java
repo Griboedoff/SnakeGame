@@ -1,4 +1,4 @@
-package Infrastructure;
+/*package Infrastructure;
 
 import Model.Cells.SnakeCell;
 import Model.Direction;
@@ -46,3 +46,4 @@ public class LevelSerializationTest
 		Assert.assertTrue(deserialized.getSnakeLen() == testLevel.getSnakeLen());
 	}
 }
+*/

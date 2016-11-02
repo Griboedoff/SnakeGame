@@ -8,7 +8,7 @@ import Model.Point;
 
 import java.lang.reflect.InvocationTargetException;
 
-import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class LevelEditor
 {
@@ -20,17 +20,17 @@ public class LevelEditor
 
 	public LevelEditor()
 	{
-		field = new GameField(defaultSize.getY(), defaultSize.getX());
+		field = new GameField(defaultSize.getX(), defaultSize.getY());
 	}
 
-	public void changeSize(int x, int y) throws IndexOutOfBoundsException
+	public void changeSize(int x, int y) throws IllegalArgumentException
 	{
 		if (x < 1 || y < 1)
-			throw new IndexOutOfBoundsException();
+			throw new IllegalArgumentException("Field size must be greater than 0");
 		GameField newField = new GameField(x, y);
-		for (int i = 0; i < max(y, field.getHeight()); i++)
-			for (int j = 0; j < max(x, field.getWidth()); j++)
-				newField.setCell(i, j, field.getCell(i, j));
+		for (int yy = 0; yy < min(y, field.getHeight()); yy++)
+			for (int xx = 0; xx < min(x, field.getWidth()); xx++)
+				newField.setCell(xx, yy, field.getCell(xx, yy));
 		field = newField;
 	}
 
@@ -46,7 +46,7 @@ public class LevelEditor
 
 	public Point getSize()
 	{
-		return new Point(field.getWidth(), field.getWidth());
+		return new Point(field.getWidth(), field.getHeight());
 	}
 
 	public void setCell(Point p, Class<?> cellClass)
