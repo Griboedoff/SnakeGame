@@ -34,7 +34,7 @@ public class LevelRepo
 		File[] levelsFiles = levelsDir.listFiles();
 		if (levelsFiles != null)
 			for (File levelFile : levelsFiles)
-				if (Objects.equals(levelFile.getName(), levelName + ".level"))
+				if (Objects.equals(levelFile.getName(), levelName))
 					try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(levelFile)))
 					{
 						return (Level) objectInputStream.readObject();

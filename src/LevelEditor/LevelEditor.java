@@ -1,9 +1,10 @@
-package SwingGui.LevelEditor;
+package LevelEditor;
 
 import Model.Cells.BaseCell;
 import Model.Cells.SnakeCell;
 import Model.Direction;
 import Model.GameField;
+import Model.Level;
 import Model.Point;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,15 +16,22 @@ public class LevelEditor
 	private GameField field;
 	private String name;
 	private Direction direction;
-	private final Point defaultSize = new Point(30, 40);
 
 
-	public LevelEditor()
+	LevelEditor()
 	{
+		Point defaultSize = new Point(30, 20);
 		field = new GameField(defaultSize.getX(), defaultSize.getY());
 	}
 
-	public void changeSize(int x, int y) throws IllegalArgumentException
+	LevelEditor(Level level)
+	{
+		field = level.getField();
+		direction = level.getSnake().getDirection();
+		name = level.getName();
+	}
+
+	void changeSize(int x, int y) throws IllegalArgumentException
 	{
 		if (x < 1 || y < 1)
 			throw new IllegalArgumentException("Field size must be greater than 0");
@@ -35,21 +43,21 @@ public class LevelEditor
 	}
 
 	public void changeSize(Point p) throws IndexOutOfBoundsException
-    {
-        changeSize(p.getX(), p.getY());
-    }
+	{
+		changeSize(p.getX(), p.getY());
+	}
 
 	public GameField getField()
 	{
 		return field;
 	}
 
-	public Point getSize()
+	private Point getSize()
 	{
 		return new Point(field.getWidth(), field.getHeight());
 	}
 
-	public void setCell(Point p, Class<?> cellClass)
+	void setCell(Point p, Class<?> cellClass)
 	{
 		if (!field.isInField(p))
 			return;
@@ -64,7 +72,7 @@ public class LevelEditor
 		field.setCell(p.getX(), p.getY(), cell);
 	}
 
-	public BaseCell getCell(int x, int y)
+	BaseCell getCell(int x, int y)
 	{
 		return field.getCell(x, y);
 	}
@@ -89,12 +97,17 @@ public class LevelEditor
 		direction = newDirection;
 	}
 
-	public Point getSnakeCoordinates() throws IndexOutOfBoundsException
+	public Point getSnakeCoordinates() throws SnakeNotFoundException
 	{
 		for (int x = 0; x < getSize().getX(); x++)
 			for (int y = 0; y < getSize().getY(); y++)
 				if (field.getCell(x, y) instanceof SnakeCell)
 					return new Point(x, y);
-		throw new IndexOutOfBoundsException();
+		throw new SnakeNotFoundException("Can't find snake");
+	}
+
+	String validate()
+	{
+		return "Everything is OK";
 	}
 }

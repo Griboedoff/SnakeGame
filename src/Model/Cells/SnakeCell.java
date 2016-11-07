@@ -7,7 +7,6 @@ import Model.Snake;
 
 public class SnakeCell extends BaseCell
 {
-
 	private SnakeCell prev;
 	private SnakeCell next;
 	private Point coordinates;

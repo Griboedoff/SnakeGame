@@ -1,10 +1,12 @@
 package Model;
 
-import SwingGui.LevelEditor.LevelEditor;
+import LevelEditor.LevelEditor;
 import Model.Cells.BaseCell;
 import Model.Cells.SnakeCell;
+import LevelEditor.SnakeNotFoundException;
 
 import java.io.Serializable;
+
 
 public class Level implements Serializable
 {
@@ -12,6 +14,16 @@ public class Level implements Serializable
 	private GameField field;
 	private Snake snake;
 	private boolean isOver;
+
+	public GameField getField()
+	{
+		return field;
+	}
+
+	public Snake getSnake()
+	{
+		return snake;
+	}
 
 	boolean isOver()
 	{
@@ -28,7 +40,7 @@ public class Level implements Serializable
 		return field.getHeight();
 	}
 
-	public Level(String name, int width, int height, int xSnake, int ySnake, Direction direction)
+	Level(String name, int width, int height, int xSnake, int ySnake, Direction direction)
 	{
 		this(name, new GameField(width, height), xSnake, ySnake, direction);
 	}
@@ -42,7 +54,7 @@ public class Level implements Serializable
 		FoodSpawner.spawnApple(field);
 	}
 
-	public static Level fromLevelEditor(LevelEditor editor)
+	public static Level fromLevelEditor(LevelEditor editor) throws SnakeNotFoundException
 	{
 		Point snakeCoordinates = editor.getSnakeCoordinates();
 		return new Level(editor.getName(),

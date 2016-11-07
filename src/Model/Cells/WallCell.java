@@ -11,7 +11,7 @@ public class WallCell extends BaseCell
 		super(x, y);
 	}
 
-	public WallCell()
+	WallCell()
 	{
 	}
 

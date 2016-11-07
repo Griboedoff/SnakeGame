@@ -28,7 +28,7 @@ public class Snake implements Serializable
 		return length;
 	}
 
-	Direction getDirection()
+	public Direction getDirection()
 	{
 		return direction;
 	}
