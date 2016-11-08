@@ -2,6 +2,7 @@ package LevelEditor;
 
 import Infrastructure.LevelRepo;
 import Model.Cells.*;
+import Model.Direction;
 import Model.Level;
 import SwingGui.PainterVisitor;
 
@@ -86,8 +87,12 @@ public class Window extends JFrame
 		{
 			try
 			{
+				editor.setName(textField1.getText());
+				editor.setDirection(Direction.DOWN);
 				Level level = Level.fromLevelEditor(this.editor);
 				levelRepo.saveLevelToFile(level);
+
+				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			} catch (Exception ex)
 			{
 				JOptionPane.showMessageDialog(null, ex.getMessage(), "InfoBox", JOptionPane.INFORMATION_MESSAGE);

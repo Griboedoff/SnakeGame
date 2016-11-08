@@ -49,14 +49,14 @@ public class LevelRepo
 	{
 		String fileName = level.getName() + ".level";
 		Path path = Paths.get(levelsDir.getAbsolutePath(), fileName);
-		try
-		{
-			Files.createFile(path);
-		} catch (Exception e)
-		{
-			System.err.println("already exists: " + e.getMessage());
-			return false;
-		}
+//		try
+//		{
+//			Files.createFile(path);
+//		} catch (Exception e)
+//		{
+//			System.err.println("already exists: " + e.getMessage());
+//			return false;
+//		}
 
 		try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path.toString())))
 		{
