@@ -106,8 +106,19 @@ public class LevelEditor
 		throw new SnakeNotFoundException("Can't find snake");
 	}
 
-	String validate()
+	public String validate()
 	{
-		return "Everything is OK";
+        if (name == null || name.equals(""))
+            return "Nameless level is unacceptable";
+        if (direction == null)
+            return "The snake hasn't direction";
+		int snakesAmount = 0;
+        for (int x = 0; x < getSize().getX(); x++)
+            for (int y = 0; y < getSize().getY(); y++)
+                if (field.getCell(x, y) instanceof SnakeCell)
+                    snakesAmount++;
+        if (snakesAmount != 1)
+            return "Amount of snakes must be equal to one";
+        return "OK";
 	}
 }
