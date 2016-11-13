@@ -22,7 +22,6 @@ public class EmptyCell extends BaseCell
 		SnakeCell newHead = new SnakeCell(snake.getNextMoveCell());
 		snake.updateHead(newHead);
 		field.setCell(newHead.getCoordinates(), newHead);
-
 		field.setCell(snake.getTail().getCoordinates(), new EmptyCell());
 		snake.deleteTail();
 	}

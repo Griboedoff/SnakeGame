@@ -2,23 +2,25 @@ package Model;
 
 import LevelEditor.LevelEditor;
 import Model.Cells.BaseCell;
+import Model.Cells.FoodCell;
 import Model.Cells.SnakeCell;
 import LevelEditor.SnakeNotFoundException;
 
 import java.io.Serializable;
+import java.util.Random;
 
 
 public class Level implements Serializable
 {
 	private String name;
 	private GameField field;
+	private int currentLevel;
 	private Snake snake;
 	private boolean isOver;
+	private Random random;
+    private int magic;
 
-	public GameField getField()
-	{
-		return field;
-	}
+	public GameField getField() { return field; }
 
 	public Snake getSnake()
 	{
@@ -51,7 +53,9 @@ public class Level implements Serializable
 		this.field = field;
 		snake = new Snake(xSnake, ySnake, direction);
 		field.setCell(snake.getHead().getCoordinates(), snake.getHead());
-		FoodSpawner.spawnApple(field);
+		Spawner.spawn(field, new FoodCell());
+        random = new Random();
+        magic = 30;
 	}
 
 	public static Level fromLevelEditor(LevelEditor editor) throws SnakeNotFoundException
@@ -86,16 +90,15 @@ public class Level implements Serializable
 
 	void tick(Direction direction)
 	{
-		Point p;
-		if (direction != null && Direction.NONE != direction)
-			p = direction.getVector().add(snake.getDirection().getVector());
-		if (direction != null && direction != Direction.NONE)//&& .equals(new Point(0,0)))
+        if (direction != null && direction != Direction.NONE)//&& .equals(new Point(0,0)))
 			snake.setDirection(direction);
 		Point nextCell = snake.getNextMoveCell();
 		boolean inField = field.isInField(nextCell);
 		if (inField)
-			field.getCell(nextCell).affectSnake(snake, field);
+            field.getCell(nextCell).affectSnake(snake, field);
 		isOver = !(inField && snake.isAlive());
+        if (random.nextInt(magic) == 0)
+            Spawner.spawnMagic(field);
 	}
 
 	public String getName()

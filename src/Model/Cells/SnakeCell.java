@@ -37,7 +37,9 @@ public class SnakeCell extends BaseCell
 	{
 		return prev;
 	}
+	public SnakeCell getNext() { return next; }
 
+	public void setPrev(SnakeCell prev) { this.prev = prev; }
 	public void setNext(SnakeCell next)
 	{
 		this.next = next;

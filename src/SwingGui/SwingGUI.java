@@ -42,7 +42,9 @@ public class SwingGUI implements IRenderer, ISnakeController
 
 	private Direction getNextDirection()
 	{
-		return listener.currentDirection;
+		Direction res = listener.currentDirection;
+        listener.currentDirection = Direction.NONE;
+        return res;
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class Snake implements Serializable
 		isAlive = alive;
 	}
 
-	int getLength()
+	public int getLength()
 	{
 		return length;
 	}
@@ -33,18 +33,25 @@ public class Snake implements Serializable
 		return direction;
 	}
 
-	void setDirection(Direction direction)
+	public void setDirection(Direction direction)
 	{
+		if (! (direction == this.direction.reverse()) )
 		this.direction = direction;
 	}
+
+	public void justSetDirection(Direction direction)
+    {
+        this.direction = direction;
+    }
 
 	public void setHead(SnakeCell newHead)
 	{
 		if (newHead != null)
 			newHead.connectTo(this.head);
 		this.head = newHead;
-		length++;
 	}
+
+	public void justSetHead(SnakeCell newHead) {this.head = newHead; }
 
 	public SnakeCell getTail()
 	{
@@ -54,10 +61,9 @@ public class Snake implements Serializable
 	public void setTail(SnakeCell tail)
 	{
 		this.tail = tail;
-		length--;
 	}
 
-	SnakeCell getHead()
+	public SnakeCell getHead()
 	{
 		return head;
 	}

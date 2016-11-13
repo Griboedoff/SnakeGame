@@ -14,7 +14,7 @@ public class GameField implements Serializable
 		field = new BaseCell[height][width];
 		for (int i = 0; i < height; i++)
 			for (int j = 0; j < width; j++)
-				field[i][j] = new EmptyCell();
+                field[i][j] = new EmptyCell();
 	}
 
 	public int getHeight()

@@ -2,7 +2,7 @@ package Model.Cells;
 
 public enum Types
 {
-	EMPTY, FOOD, SNAKE, WALL;
+	EMPTY, FOOD, SNAKE, WALL, PORTAL;
 
 	public BaseCell toCell(int x, int y)
 	{
@@ -14,6 +14,8 @@ public enum Types
 				return new SnakeCell(x, y);
 			case WALL:
 				return new WallCell();
+			case PORTAL:
+				return new PortalCell();
 			default:
 				return new EmptyCell();
 		}

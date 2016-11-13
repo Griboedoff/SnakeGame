@@ -1,9 +1,6 @@
 package SwingGui;
 
-import Model.Cells.EmptyCell;
-import Model.Cells.FoodCell;
-import Model.Cells.SnakeCell;
-import Model.Cells.WallCell;
+import Model.Cells.*;
 
 import java.awt.*;
 
@@ -35,7 +32,7 @@ public class PainterVisitor
 
 	public void visitFoodCell(FoodCell cell, int x, int y)
 	{
-		graphics.setColor(new Color(141, 5, 45));
+		graphics.setColor(new Color(255, 0, 0));
 		graphics.fillRect(cellSize * x, cellSize * y, cellSize, cellSize);
 		graphics.setColor(Color.BLACK);
 		graphics.drawRect(cellSize * x, cellSize * y, cellSize, cellSize);
@@ -44,6 +41,30 @@ public class PainterVisitor
 	public void visitWallCell(WallCell cell, int x, int y)
     {
         graphics.setColor(new Color(150, 30, 90));
+        graphics.fillRect(cellSize * x, cellSize * y, cellSize, cellSize);
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(cellSize * x, cellSize * y, cellSize, cellSize);
+    }
+
+    public void visitPortalCell(PortalCell cell, int x, int y)
+    {
+        graphics.setColor(new Color(0, 0, 255));
+        graphics.fillRect(cellSize * x, cellSize * y, cellSize, cellSize);
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(cellSize * x, cellSize * y, cellSize, cellSize);
+    }
+
+    public void visitPoisonCell(PoisonCell cell, int x, int y)
+    {
+        graphics.setColor(new Color(150, 255, 0));
+        graphics.fillRect(cellSize * x, cellSize * y, cellSize, cellSize);
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(cellSize * x, cellSize * y, cellSize, cellSize);
+    }
+
+    public void visitReverseCell(ReverseCell cell, int x, int y)
+    {
+        graphics.setColor(new Color(255, 128, 0));
         graphics.fillRect(cellSize * x, cellSize * y, cellSize, cellSize);
         graphics.setColor(Color.BLACK);
         graphics.drawRect(cellSize * x, cellSize * y, cellSize, cellSize);
