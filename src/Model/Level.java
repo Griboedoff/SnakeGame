@@ -1,10 +1,10 @@
 package Model;
 
-import LevelEditor.LevelEditor;
+import Swing.LevelEditor.LevelEditor;
 import Model.Cells.BaseCell;
 import Model.Cells.FoodCell;
 import Model.Cells.SnakeCell;
-import LevelEditor.SnakeNotFoundException;
+import Swing.LevelEditor.SnakeNotFoundException;
 
 import java.io.Serializable;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package LevelEditor;
+package Swing.LevelEditor;
 
 import Model.Cells.BaseCell;
 import Model.Cells.SnakeCell;

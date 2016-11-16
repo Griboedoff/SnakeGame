@@ -26,36 +26,57 @@ public enum Direction implements Serializable
 	}
 
 	public static Direction byPoint(Point point) throws ValueException
-    {
-        int x = point.getX();
-        int y = point.getY();
-        if (x > 0 && y == 0)
-            return Direction.RIGHT;
-        if (x < 0 && y == 0)
-            return Direction.LEFT;
-        if (x == 0 && y > 0)
-            return Direction.UP;
-        if (x == 0 && y < 0)
-            return Direction.DOWN;
-        if (x == 0 && y == 0)
-            return Direction.NONE;
-        throw new ValueException("No direction for vector");
-    }
+	{
+		int x = point.getX();
+		int y = point.getY();
+		if (x > 0 && y == 0)
+			return Direction.RIGHT;
+		if (x < 0 && y == 0)
+			return Direction.LEFT;
+		if (x == 0 && y > 0)
+			return Direction.UP;
+		if (x == 0 && y < 0)
+			return Direction.DOWN;
+		if (x == 0 && y == 0)
+			return Direction.NONE;
+		throw new ValueException("No direction for vector");
+	}
 
-    public Direction reverse()
-    {
-        switch (this)
-        {
-            case UP:
-                return DOWN;
-            case DOWN:
-                return UP;
-            case LEFT:
-                return RIGHT;
-            case RIGHT:
-                return LEFT;
-            default:
-                return NONE;
-        }
-    }
+	public Direction reverse()
+	{
+		switch (this)
+		{
+			case UP:
+				return DOWN;
+			case DOWN:
+				return UP;
+			case LEFT:
+				return RIGHT;
+			case RIGHT:
+				return LEFT;
+			default:
+				return NONE;
+		}
+	}
+
+	public static Direction fromString(Object selectedItem)
+	{
+		if (selectedItem instanceof String)
+		{
+			String direction = (String) selectedItem;
+			switch (direction)
+			{
+				case "UP":
+					return Direction.UP;
+				case "DOWN":
+					return Direction.DOWN;
+				case "RIGHT":
+					return Direction.RIGHT;
+				case "LEFT":
+					return Direction.LEFT;
+			}
+		}
+		return NONE;
+	}
+
 }

@@ -1,10 +1,10 @@
-package LevelEditor;
+package Swing.LevelEditor;
 
 import Infrastructure.LevelRepo;
 import Model.Cells.*;
 import Model.Direction;
 import Model.Level;
-import SwingGui.PainterVisitor;
+import Swing.SwingGui.PainterVisitor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,8 +27,8 @@ public class Window extends JFrame
 	private JSpinner xValueSpinner;
 	private JSpinner yValueSpinner;
 	private JPanel field;
-	private JComboBox comboBox1;
-	private JTextField textField1;
+	private JComboBox directionBox;
+	private JTextField levelNameField;
 	private JButton portalCellButton;
 	private JButton poisonCellButton;
 	private JButton reverseCellButton;
@@ -45,7 +45,7 @@ public class Window extends JFrame
 
 		initializeListeners();
 
-		textField1.setText(editor.getName());
+		levelNameField.setText(editor.getName());
 		xValueSpinner.setValue(editor.getField().getWidth());
 		yValueSpinner.setValue(editor.getField().getHeight());
 	}
@@ -86,16 +86,20 @@ public class Window extends JFrame
 				JOptionPane.showMessageDialog(null, ex, "InfoBox", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		Validate.addActionListener(e -> JOptionPane.showMessageDialog(null, this.editor.validate(), "InfoBox", JOptionPane.INFORMATION_MESSAGE));
+		Validate.addActionListener(e ->
+		{
+			fillFields();
+			JOptionPane.showMessageDialog(null, this.editor.validate(), "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+		});
 		saveButton.addActionListener(e ->
 		{
 			try
 			{
-				editor.setName(textField1.getText());
-				editor.setDirection(Direction.DOWN);
+				fillFields();
 				Level level = Level.fromLevelEditor(this.editor);
 				levelRepo.saveLevelToFile(level);
 
+				JOptionPane.showMessageDialog(null, "Success", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
 				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			} catch (Exception ex)
 			{
@@ -135,6 +139,12 @@ public class Window extends JFrame
 
 			}
 		});
+	}
+
+	private void fillFields()
+	{
+		editor.setName(levelNameField.getText());
+		editor.setDirection(Direction.fromString(directionBox.getSelectedItem()));
 	}
 
 	private void resetAllButtonsColor()

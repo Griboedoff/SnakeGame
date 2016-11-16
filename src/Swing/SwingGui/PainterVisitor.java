@@ -1,4 +1,4 @@
-package SwingGui;
+package Swing.SwingGui;
 
 import Model.Cells.*;
 
