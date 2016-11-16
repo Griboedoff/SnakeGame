@@ -82,7 +82,7 @@ public class LevelEditor
 		return name;
 	}
 
-	public void setName(String newName)
+	void setName(String newName)
 	{
 		name = newName;
 	}
@@ -106,7 +106,7 @@ public class LevelEditor
 		throw new SnakeNotFoundException("Can't find snake");
 	}
 
-	public String validate()
+	String validate()
 	{
         if (name == null || name.equals(""))
             return "Nameless level is unacceptable";

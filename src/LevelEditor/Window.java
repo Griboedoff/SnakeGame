@@ -16,8 +16,6 @@ import java.io.File;
 public class Window extends JFrame
 {
 	private static final int CELL_SIZE = 16;
-	private static final Color DEFAULT_BUTTON_COLOR = new Color(60, 63, 65);
-	private static final Color SELECTED_BUTTON_COLOR = new Color(120, 179, 108);
 	private JPanel root;
 	private JButton saveButton;
 	private JButton Validate;
@@ -31,6 +29,9 @@ public class Window extends JFrame
 	private JPanel field;
 	private JComboBox comboBox1;
 	private JTextField textField1;
+	private JButton portalCellButton;
+	private JButton poisonCellButton;
+	private JButton reverseCellButton;
 
 	private LevelEditor editor;
 	private Class<?> selectedCellType;
@@ -71,6 +72,9 @@ public class Window extends JFrame
 		wallCellButton.addActionListener(e -> handleButtonClick(WallCell.class, wallCellButton));
 		emptyCellButton.addActionListener(e -> handleButtonClick(EmptyCell.class, emptyCellButton));
 		foodCellButton.addActionListener(e -> handleButtonClick(FoodCell.class, foodCellButton));
+		poisonCellButton.addActionListener(e -> handleButtonClick(PoisonCell.class, poisonCellButton));
+		portalCellButton.addActionListener(e -> handleButtonClick(PortalCell.class, portalCellButton));
+		reverseCellButton.addActionListener(e -> handleButtonClick(ReverseCell.class, reverseCellButton));
 		resizeFieldButton.addActionListener(e ->
 		{
 			try
@@ -139,6 +143,9 @@ public class Window extends JFrame
 		wallCellButton.setEnabled(true);
 		emptyCellButton.setEnabled(true);
 		foodCellButton.setEnabled(true);
+		poisonCellButton.setEnabled(true);
+		portalCellButton.setEnabled(true);
+		reverseCellButton.setEnabled(true);
 	}
 
 	private void handleButtonClick(Class<?> cellClass, JButton button)

@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="LevelEditor.Window">
   <grid id="27dc6" binding="root" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="600" height="415"/>
+      <xy x="20" y="20" width="655" height="415"/>
     </constraints>
     <properties>
       <preferredSize width="551" height="700"/>
@@ -35,29 +35,63 @@
           <component id="e2583" class="javax.swing.JButton" binding="snakeCellButton">
             <constraints/>
             <properties>
-              <text value="Snake"/>
+              <background color="-13684975"/>
+              <foreground color="-1"/>
+              <text value="S"/>
+              <toolTipText value="Snake Cell"/>
             </properties>
           </component>
           <component id="3ee9b" class="javax.swing.JButton" binding="wallCellButton">
             <constraints/>
             <properties>
-              <text value="Wall"/>
+              <background color="-6939046"/>
+              <foreground color="-1"/>
+              <text value="W"/>
+              <toolTipText value="Wall Cell"/>
             </properties>
           </component>
           <component id="70402" class="javax.swing.JButton" binding="emptyCellButton">
             <constraints/>
             <properties>
-              <background color="-8866964"/>
+              <background color="-10520558"/>
               <enabled value="false"/>
+              <foreground color="-1"/>
               <hideActionText value="false"/>
-              <text value="Empty"/>
+              <text value="E"/>
             </properties>
           </component>
           <component id="34ad1" class="javax.swing.JButton" binding="foodCellButton">
             <constraints/>
             <properties>
+              <background color="-65536"/>
               <hideActionText value="true"/>
-              <text value="Food"/>
+              <text value="F"/>
+              <toolTipText value="Food Cell"/>
+            </properties>
+          </component>
+          <component id="b58e0" class="javax.swing.JButton" binding="portalCellButton">
+            <constraints/>
+            <properties>
+              <background color="-16776961"/>
+              <foreground color="-1"/>
+              <text value="Por"/>
+              <toolTipText value="Portal Cell"/>
+            </properties>
+          </component>
+          <component id="3d6cb" class="javax.swing.JButton" binding="poisonCellButton">
+            <constraints/>
+            <properties>
+              <background color="-6881536"/>
+              <text value="Poi"/>
+              <toolTipText value="Poison Cell"/>
+            </properties>
+          </component>
+          <component id="bba54" class="javax.swing.JButton" binding="reverseCellButton">
+            <constraints/>
+            <properties>
+              <background color="-32768"/>
+              <text value="R"/>
+              <toolTipText value="Reverse Cell"/>
             </properties>
           </component>
           <component id="bc7db" class="javax.swing.JSeparator">
@@ -71,6 +105,7 @@
             <constraints/>
             <properties>
               <minimumSize width="40" height="24"/>
+              <toolTipText value="Level Name"/>
             </properties>
           </component>
           <component id="585c3" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
@@ -83,6 +118,7 @@
                 <item value="DIRECTION LEFT"/>
                 <item value="DIRECTION RIGHT"/>
               </model>
+              <toolTipText value="Snake Direction"/>
             </properties>
           </component>
           <component id="a01af" class="javax.swing.JSeparator">
@@ -93,11 +129,15 @@
           </component>
           <component id="c719f" class="javax.swing.JSpinner" binding="xValueSpinner">
             <constraints/>
-            <properties/>
+            <properties>
+              <toolTipText value="Width"/>
+            </properties>
           </component>
           <component id="57d65" class="javax.swing.JSpinner" binding="yValueSpinner">
             <constraints/>
-            <properties/>
+            <properties>
+              <toolTipText value="Height"/>
+            </properties>
           </component>
           <component id="e964a" class="javax.swing.JButton" binding="resizeFieldButton">
             <constraints/>
