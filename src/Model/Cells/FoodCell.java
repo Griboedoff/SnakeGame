@@ -1,15 +1,16 @@
 package Model.Cells;
 
 import SwingGui.PainterVisitor;
-import Model.FoodSpawner;
+import Model.Spawner;
 import Model.GameField;
 import Model.Snake;
 
-import java.awt.*;
-
 public class FoodCell extends BaseCell
 {
-	public Color color = Color.RED;
+	public FoodCell(int x, int y)
+	{
+		super(x, y);
+	}
 
 	public FoodCell()
 	{
@@ -21,7 +22,7 @@ public class FoodCell extends BaseCell
 		SnakeCell newHead = new SnakeCell(snake.getNextMoveCell());
 		snake.updateHead(newHead);
 		field.setCell(newHead.getCoordinates().getX(), newHead.getCoordinates().getY(), newHead);
-		FoodSpawner.spawnApple(field);
+		Spawner.spawn(field, new FoodCell());
 	}
 
 	@Override

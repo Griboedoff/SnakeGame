@@ -7,7 +7,6 @@ import Model.Snake;
 
 public class SnakeCell extends BaseCell
 {
-
 	private SnakeCell prev;
 	private SnakeCell next;
 	private Point coordinates;
@@ -27,10 +26,6 @@ public class SnakeCell extends BaseCell
 		return coordinates;
 	}
 
-	public SnakeCell()
-	{
-	}
-
 	public SnakeCell connectTo(SnakeCell to)
 	{
 		next = to;
@@ -42,7 +37,9 @@ public class SnakeCell extends BaseCell
 	{
 		return prev;
 	}
+	public SnakeCell getNext() { return next; }
 
+	public void setPrev(SnakeCell prev) { this.prev = prev; }
 	public void setNext(SnakeCell next)
 	{
 		this.next = next;

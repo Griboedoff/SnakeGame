@@ -33,13 +33,10 @@ public class SwingKeyListener implements KeyListener
 				currentDirection = Direction.LEFT;
 				break;
 			default:
-				currentDirection = Direction.NONE;
+				break;
 		}
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e)
-	{
-		currentDirection = Direction.NONE;
-	}
+	public void keyReleased(KeyEvent e) {	}
 }

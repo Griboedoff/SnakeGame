@@ -41,8 +41,18 @@ public class Point implements Serializable
 		return p.x == x && p.y == y;
 	}
 
-	Point add(Point other)
+	public Point add(Point other)
 	{
 		return new Point(x + other.x, y + other.y);
+	}
+
+	public Point sub(Point other)
+    {
+        return new Point(x - other.x, y - other.y);
+    }
+
+	public boolean isPositive()
+	{
+		return x > 0 && y > 0;
 	}
 }

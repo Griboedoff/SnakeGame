@@ -17,8 +17,13 @@ class LevelWindow extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	@Override
-	public void update(Graphics g)
+	void updateGameEnd(Graphics g)
+	{
+		g.setColor(Color.BLACK);
+		g.drawString("Game Over :(", (level.getFieldWidth() / 3), (level.getFieldHeight() / 2));
+	}
+
+	void updateField(Graphics g)
 	{
 		PainterVisitor v = new PainterVisitor(g, CELL_SIZE);
 		for (int x = 0; x < level.getFieldWidth(); x++)
