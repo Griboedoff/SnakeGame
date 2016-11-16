@@ -33,7 +33,6 @@ public class Engine
 
 	public void run() throws InterruptedException
 	{
-//		currentLevel = new Level("1", 30, 40, 3, 4, Direction.UP);
 		currentLevel = levelRepo.getLevelFromFile("First.level");
 		while (!currentLevel.isOver())
 		{

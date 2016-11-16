@@ -2,7 +2,8 @@ package SwingGui;
 
 import Model.Cells.*;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
 public class PainterVisitor
 
