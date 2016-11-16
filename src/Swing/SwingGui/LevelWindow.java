@@ -72,6 +72,5 @@ class LevelWindow extends JFrame
 	void updateGameEnd()
 	{
 		JOptionPane.showMessageDialog(null, "Game Over", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
-		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 }

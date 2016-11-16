@@ -42,7 +42,7 @@ public class Level implements Serializable
 		return field.getHeight();
 	}
 
-	Level(String name, int width, int height, int xSnake, int ySnake, Direction direction)
+	public Level(String name, int width, int height, int xSnake, int ySnake, Direction direction)
 	{
 		this(name, new GameField(width, height), xSnake, ySnake, direction);
 	}

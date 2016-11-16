@@ -33,14 +33,17 @@ public class Engine
 
 	public void run() throws InterruptedException
 	{
-		currentLevel = renderer.selectLevel(levelRepo);
-		while (!currentLevel.isOver())
+		while (true)
 		{
-			Direction direction = snakeController.getNewDirection();
-			currentLevel.tick(direction);
-			renderer.renderLevel(currentLevel);
-			Thread.sleep(defaultGameLownessMS);
+			currentLevel = renderer.selectLevel(levelRepo);
+			while (!currentLevel.isOver())
+			{
+				Direction direction = snakeController.getNewDirection();
+				currentLevel.tick(direction);
+				renderer.renderLevel(currentLevel);
+				Thread.sleep(defaultGameLownessMS);
+			}
+			renderer.renderGameEnd(false);
 		}
-		renderer.renderGameEnd(false);
 	}
 }
