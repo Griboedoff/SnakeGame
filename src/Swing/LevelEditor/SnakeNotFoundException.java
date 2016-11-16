@@ -1,4 +1,4 @@
-package LevelEditor;
+package Swing.LevelEditor;
 
 public class SnakeNotFoundException extends Exception
 {

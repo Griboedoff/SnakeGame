@@ -2,7 +2,7 @@ package Model.Cells;
 
 import Model.GameField;
 import Model.Snake;
-import SwingGui.PainterVisitor;
+import Swing.SwingGui.PainterVisitor;
 
 import java.awt.*;
 import java.io.Serializable;

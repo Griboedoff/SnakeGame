@@ -1,4 +1,4 @@
-package LevelEditor;
+package Swing.LevelEditor;
 
 import Model.Cells.BaseCell;
 import Model.Cells.SnakeCell;
@@ -67,7 +67,7 @@ public class LevelEditor
 			cell = (BaseCell) cellClass.getConstructor(int.class, int.class).newInstance(p.getX(), p.getY());
 		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
 		{
-			throw new RuntimeException("Can't invoke ctor");
+			throw new RuntimeException("Can't invoke ctor " + cellClass.getName(), e);
 		}
 		field.setCell(p.getX(), p.getY(), cell);
 	}
@@ -82,7 +82,7 @@ public class LevelEditor
 		return name;
 	}
 
-	public void setName(String newName)
+	void setName(String newName)
 	{
 		name = newName;
 	}
@@ -106,7 +106,7 @@ public class LevelEditor
 		throw new SnakeNotFoundException("Can't find snake");
 	}
 
-	public String validate()
+	String validate()
 	{
         if (name == null || name.equals(""))
             return "Nameless level is unacceptable";

@@ -1,14 +1,12 @@
-import Model.Engine;
-import SwingGui.SwingGUI;
-import SwingGui.SwingKeyListener;
+package Swing.SwingGui;
 
-public class GameRunner
+import Model.Engine;
+
+public class SwingGameRunner
 {
 	public static void main(String[] args)
 	{
-		SwingKeyListener l = new SwingKeyListener();
 		SwingGUI gui = new SwingGUI();
-		gui.addKeyListener(l);
 		Engine engine = new Engine("./Levels", gui, gui);
 		try
 		{

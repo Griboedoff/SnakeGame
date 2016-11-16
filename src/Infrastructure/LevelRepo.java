@@ -3,35 +3,34 @@ package Infrastructure;
 import Model.Level;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
 public class LevelRepo
 {
-	public void setLevelsDir(File levelsDir)
+	public void setLevelsDirectory(File levelsDirectory)
 	{
-		if (!levelsDir.isDirectory())
-			throw new IllegalArgumentException(String.format("%SaveListener is not directory", levelsDir.getAbsolutePath()));
-		this.levelsDir = levelsDir;
+		if (!levelsDirectory.isDirectory())
+			throw new IllegalArgumentException(String.format("%SaveListener is not directory", levelsDirectory.getAbsolutePath()));
+		this.levelsDirectory = levelsDirectory;
 	}
 
-	private File levelsDir;
+	private File levelsDirectory;
 
 	public LevelRepo(String path)
 	{
-		levelsDir = new File(path);
+		levelsDirectory = new File(path);
 	}
 
-	public LevelRepo(File levelsDir)
+	public LevelRepo(File levelsDirectory)
 	{
-		this.levelsDir = levelsDir;
+		this.levelsDirectory = levelsDirectory;
 	}
 
 	public Level getLevelFromFile(String levelName)
 	{
-		File[] levelsFiles = levelsDir.listFiles();
+		File[] levelsFiles = levelsDirectory.listFiles();
 		if (levelsFiles != null)
 			for (File levelFile : levelsFiles)
 				if (Objects.equals(levelFile.getName(), levelName))
@@ -45,18 +44,15 @@ public class LevelRepo
 		throw new IllegalArgumentException(String.format("%SaveListener not found", levelName));
 	}
 
+	public File getLevelsDirectory()
+	{
+		return levelsDirectory;
+	}
+
 	public boolean saveLevelToFile(Level level)
 	{
 		String fileName = level.getName() + ".level";
-		Path path = Paths.get(levelsDir.getAbsolutePath(), fileName);
-//		try
-//		{
-//			Files.createFile(path);
-//		} catch (Exception e)
-//		{
-//			System.err.println("already exists: " + e.getMessage());
-//			return false;
-//		}
+		Path path = Paths.get(levelsDirectory.getAbsolutePath(), fileName);
 
 		try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path.toString())))
 		{

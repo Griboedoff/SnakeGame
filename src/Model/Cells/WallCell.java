@@ -2,7 +2,7 @@ package Model.Cells;
 
 import Model.GameField;
 import Model.Snake;
-import SwingGui.PainterVisitor;
+import Swing.SwingGui.PainterVisitor;
 
 public class WallCell extends BaseCell
 {

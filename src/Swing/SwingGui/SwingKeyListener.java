@@ -1,13 +1,23 @@
-package SwingGui;
+package Swing.SwingGui;
 
 import Model.Direction;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class SwingKeyListener implements KeyListener
+class SwingKeyListener implements KeyListener
 {
-	Direction currentDirection = Direction.NONE;
+	private Direction currentDirection = Direction.NONE;
+
+	Direction getCurrentDirection()
+	{
+		return currentDirection;
+	}
+
+	void resetCurrentDirection()
+	{
+		this.currentDirection = Direction.NONE;
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e)
@@ -38,5 +48,7 @@ public class SwingKeyListener implements KeyListener
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {	}
+	public void keyReleased(KeyEvent e)
+	{
+	}
 }

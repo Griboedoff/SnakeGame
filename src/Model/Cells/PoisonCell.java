@@ -2,11 +2,16 @@ package Model.Cells;
 
 import Model.GameField;
 import Model.Snake;
-import SwingGui.PainterVisitor;
+import Swing.SwingGui.PainterVisitor;
 
 public class PoisonCell extends BaseCell
 {
     public PoisonCell() { }
+
+    public PoisonCell(int x, int y)
+    {
+        super(x, y);
+    }
 
     @Override
     public void affectSnake(Snake snake, GameField field)

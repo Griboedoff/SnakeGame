@@ -1,6 +1,6 @@
 package Model.Cells;
 
-import SwingGui.PainterVisitor;
+import Swing.SwingGui.PainterVisitor;
 import Model.Spawner;
 import Model.GameField;
 import Model.Snake;

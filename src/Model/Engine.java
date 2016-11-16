@@ -33,7 +33,7 @@ public class Engine
 
 	public void run() throws InterruptedException
 	{
-		currentLevel = levelRepo.getLevelFromFile("First.level");
+		currentLevel = renderer.selectLevel(levelRepo);
 		while (!currentLevel.isOver())
 		{
 			Direction direction = snakeController.getNewDirection();
