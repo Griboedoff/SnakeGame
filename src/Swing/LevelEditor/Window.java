@@ -77,14 +77,7 @@ public class Window extends JFrame
 		reverseCellButton.addActionListener(e -> handleButtonClick(ReverseCell.class, reverseCellButton));
 		resizeFieldButton.addActionListener(e ->
 		{
-			try
-			{
-				this.editor.changeSize((int) xValueSpinner.getValue(), (int) yValueSpinner.getValue());
-				field.repaint();
-			} catch (IllegalArgumentException ex)
-			{
-				JOptionPane.showMessageDialog(null, ex, "InfoBox", JOptionPane.INFORMATION_MESSAGE);
-			}
+
 		});
 		Validate.addActionListener(e ->
 		{

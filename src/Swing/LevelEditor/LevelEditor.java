@@ -67,7 +67,7 @@ public class LevelEditor
 			cell = (BaseCell) cellClass.getConstructor(int.class, int.class).newInstance(p.getX(), p.getY());
 		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
 		{
-			throw new RuntimeException("Can't invoke ctor");
+			throw new RuntimeException("Can't invoke ctor " + cellClass.getName(), e);
 		}
 		field.setCell(p.getX(), p.getY(), cell);
 	}
