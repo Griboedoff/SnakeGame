@@ -7,6 +7,8 @@ import java.io.Serializable;
 @SuppressWarnings("SameReturnValue")
 public class Snake implements Serializable
 {
+	private static final long serialVersionUID = 213456783;
+
 	private SnakeCell head;
 	private SnakeCell tail;
 	private Direction direction;

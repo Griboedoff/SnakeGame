@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 public class GameField implements Serializable
 {
+	private static final long serialVersionUID = 213456783;
+
 	private BaseCell[][] field;
 
 	public GameField(int width, int height)
@@ -27,7 +29,7 @@ public class GameField implements Serializable
 		return field[0].length;
 	}
 
-	public boolean isInField(int x, int y)
+	private boolean isInField(int x, int y)
 	{
 		return 0 <= x && x < getWidth() && 0 <= y && y < getHeight();
 	}

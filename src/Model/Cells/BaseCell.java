@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 public abstract class BaseCell implements Serializable
 {
+	private static final long serialVersionUID = 213456783;
+
 	public Color color;
 
 	BaseCell()

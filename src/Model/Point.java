@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Point implements Serializable
 {
+	private static final long serialVersionUID = 213456783;
+
 	private int x;
 	private int y;
 
@@ -41,7 +43,7 @@ public class Point implements Serializable
 		return p.x == x && p.y == y;
 	}
 
-	public Point add(Point other)
+	Point add(Point other)
 	{
 		return new Point(x + other.x, y + other.y);
 	}

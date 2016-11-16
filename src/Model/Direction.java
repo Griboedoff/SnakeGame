@@ -8,6 +8,8 @@ public enum Direction implements Serializable
 {
 	UP, LEFT, DOWN, RIGHT, NONE;
 
+	private static final long serialVersionUID = 213456783;
+
 	public Point getVector()
 	{
 		switch (this)
