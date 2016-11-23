@@ -2,6 +2,8 @@ package Model;
 
 import java.io.Serializable;
 
+import static java.lang.Math.abs;
+
 public class Point2d implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
@@ -24,6 +26,8 @@ public class Point2d implements Serializable
 	{
 		return y;
 	}
+
+	public int getLength() {return abs(x) + abs(y); }
 
 	@Override
 	public String toString()

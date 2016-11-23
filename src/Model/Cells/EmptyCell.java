@@ -1,18 +1,20 @@
 package Model.Cells;
 
 import Model.GameField;
+import Model.Point3d;
 import Model.Snake;
+import Model.Space;
 import Swing.SwingGui.SwingPainterVisitor;
 
 public class EmptyCell extends BaseCell
 {
 	@Override
-	public void affectSnake(Snake snake, GameField field)
+	public void affectSnake(Snake snake, Point3d fieldVector, Space space)
 	{
 		SnakeCell newHead = new SnakeCell(snake.getNextMoveCell());
 		snake.updateHead(newHead);
-		field.setCell(newHead.getLocation(), newHead);
-		field.setCell(snake.getTail().getLocation(), new EmptyCell());
+		space.setCell(newHead.getLocation(), newHead);
+		space.setCell(snake.getTail().getLocation(), new EmptyCell());
 		snake.deleteTail();
 	}
 

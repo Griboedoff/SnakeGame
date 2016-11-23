@@ -27,7 +27,7 @@ public class LevelEditor
 	LevelEditor(Level level)
 	{
 		field = level.getField();
-		direction = level.getSnake().getDirection();
+		direction = level.getSnake().getVectorDirection();
 		name = level.getName();
 	}
 

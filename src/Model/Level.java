@@ -21,17 +21,17 @@ public class Level implements Serializable
 	private Random random;
 	private int magic;
 	private Space space;
-	private ICellSelector selector;
+    private Point3d fieldVector;
 
 	private Level(String name, Point3d snakeP, Direction direction)
 	{
 		this.name = name;
-		snake = new Snake(snakeP, direction);
+		snake = new Snake(snakeP, pointTo3D(direction.getVector()));
 		Spawner.spawn(field, new FoodCell());
 		random = new Random();
 		magic = 30;
-		field = space.getSection(new Point3d(0, 0, 1));
-		field.setCell(snake.getHead().getLocation(), snake.getHead(), selector);
+		space.setCell(snake.getHead().getLocation(), snake.getHead());
+        field = space.getSection(new Point3d(-1, -1, 1));
 	}
 
 	public static Level fromLevelEditor(LevelEditor editor) throws SnakeNotFoundException
@@ -89,14 +89,17 @@ public class Level implements Serializable
 	void tick(Direction direction)
 	{
 		if (direction != null && direction != Direction.NONE)
-			snake.setDirection(direction);
-		Point3d nextCell = snake.getNextMoveCell();
-		boolean inField = field.isInField(nextCell);
+			snake.setVectorDirection(pointTo3D(direction.getVector()));
+		Point3d nextPoint3d = snake.getNextMoveCell();
+        Point2d nextPoint2d = pointTo2D(nextPoint3d);
+        BaseCell nextCell = field.getCell(nextPoint2d);
+		boolean inField = field.isInField(nextPoint2d);
 		if (inField)
-			field.getCell(nextCell.getX(), nextCell.getY()).affectSnake(snake, field);
+			nextCell.affectSnake(snake, fieldVector, space);
 		isOver = !(inField && snake.isAlive());
 		if (random.nextInt(magic) == 0)
-			Spawner.spawnRandom(field);
+			Spawner.spawnRandom(space);
+        field = space.getSection(fieldVector);
 	}
 
 	public String getName()
@@ -108,4 +111,19 @@ public class Level implements Serializable
 	{
 		this.name = name;
 	}
+
+	public void rotate(Point3d vector) throws Exception
+    {
+        return 1;
+    }
+
+    public Point3d pointTo3D(Point2d point)
+    {
+
+    }
+
+    public Point2d pointTo2D(Point3d point)
+    {
+
+    }
 }

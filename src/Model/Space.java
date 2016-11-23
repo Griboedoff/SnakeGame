@@ -32,14 +32,14 @@ public class Space
 
 	public GameField getSection(Point3d p)
 	{
-		if (p.getX() != 0)
+		if (p.getX() != -1)
 		{
 			BaseCell[][] cells = new BaseCell[this.size.getY()][this.size.getZ()];
 			for (int y = 0; y < cells.length; y++)
 				for (int z = 0; z < cells[0].length; z++)
 					cells[y][z] = this.cells.get(new Point3d(p.getX(), y, z));
 			return new GameField(cells);
-		} else if (p.getY() != 0)
+		} else if (p.getY() != -1)
 		{
 			BaseCell[][] cells = new BaseCell[this.size.getZ()][this.size.getX()];
 			for (int z = 0; z < cells.length; z++)

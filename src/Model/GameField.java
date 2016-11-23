@@ -43,11 +43,7 @@ public class GameField implements Serializable
 		return field[x][y];
 	}
 
-	BaseCell getCell(Point3d point, ICellSelector cellSelector)
-	{
-		Point3d p = cellSelector.selectCell(point);
-		return getCell(p.getX(), p.getY());
-	}
+	public BaseCell getCell(Point2d point) { return getCell(point.getX(), point.getY()); }
 
 	public void setCell(int x, int y, BaseCell newCell) throws IndexOutOfBoundsException
 	{
@@ -56,22 +52,13 @@ public class GameField implements Serializable
 		field[x][y] = newCell;
 	}
 
+	public void setCell(Point2d point, BaseCell newCell) { setCell(point.getX(), point.getY(), newCell); }
 
-	public void setCell(Point3d point, BaseCell newCell, ICellSelector cellSelector)
-	{
-		Point3d p = cellSelector.selectCell(point);
-		setCell(p.getX(), p.getY(), newCell);
-	}
-
-	private boolean isInField(int x, int y)
+	public boolean isInField(int x, int y)
 	{
 		return 0 <= x && x < getWidth() && 0 <= y && y < getHeight();
 	}
-
-	public boolean isInField(Point3d point)
-	{
-		return isInField(point.getX(), point.getY());
-	}
+	public boolean isInField(Point2d point) { return isInField(point.getX(), point.getY()); }
 
 	int countEmptyCells()
 	{

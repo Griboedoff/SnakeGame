@@ -57,20 +57,20 @@ public enum Direction implements Serializable
 		return NONE;
 	}
 
-	public Point3d getVector()
+	public Point2d getVector()
 	{
 		switch (this)
 		{
 			case UP:
-				return new Point3d(0, 1, 0);
+				return new Point2d(0, 1);
 			case DOWN:
-				return new Point3d(0, -1, 0);
+				return new Point2d(0, -1);
 			case RIGHT:
-				return new Point3d(1, 0, 0);
+				return new Point2d(1, 0);
 			case LEFT:
-				return new Point3d(-1, 0, 0);
+				return new Point2d(-1, 0);
 			default:
-				return new Point3d(0, 0, 0);
+				return new Point2d(0, 0);
 		}
 	}
 
