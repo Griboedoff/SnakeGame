@@ -37,7 +37,7 @@ class LevelWindow extends JFrame
 		};
 		add(panel);
 		initListener();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
 	public Level getLevel()

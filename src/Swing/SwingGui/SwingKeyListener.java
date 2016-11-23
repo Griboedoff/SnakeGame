@@ -42,6 +42,7 @@ class SwingKeyListener implements KeyListener
 			case (KeyEvent.VK_LEFT):
 				currentDirection = Direction.LEFT;
 				break;
+
 			default:
 				break;
 		}
