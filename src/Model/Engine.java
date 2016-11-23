@@ -1,8 +1,8 @@
 package Model;
 
+import Infrastructure.IRenderer;
 import Infrastructure.ISnakeController;
 import Infrastructure.LevelRepo;
-import Infrastructure.IRenderer;
 
 public class Engine
 {
@@ -17,18 +17,6 @@ public class Engine
 		levelRepo = new LevelRepo(pathToLevelRepo);
 		this.snakeController = snakeController;
 		this.renderer = renderer;
-	}
-
-	private Level loadLevel(String levelName)
-	{
-		try
-		{
-			return levelRepo.getLevelFromFile(levelName);
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	public void run() throws InterruptedException

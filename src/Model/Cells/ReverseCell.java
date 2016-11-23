@@ -4,7 +4,7 @@ import Model.Direction;
 import Model.GameField;
 import Model.Point;
 import Model.Snake;
-import Swing.SwingGui.PainterVisitor;
+import Swing.SwingGui.SwingPainterVisitor;
 
 public class ReverseCell extends BaseCell
 {
@@ -12,20 +12,15 @@ public class ReverseCell extends BaseCell
 	{
 	}
 
-	public ReverseCell(int x, int y)
-	{
-		super(x, y);
-	}
-
 	@Override
 	public void affectSnake(Snake snake, GameField field)
 	{
 		SnakeCell newHead = new SnakeCell(snake.getNextMoveCell());
 		snake.updateHead(newHead);
-		field.setCell(newHead.getCoordinates().getX(), newHead.getCoordinates().getY(), newHead);
+		field.setCell(newHead.getLocation().getX(), newHead.getLocation().getY(), newHead);
 
-		Point newDirectionVector = snake.getTail().getCoordinates().sub(snake.getTail().getPrev().getCoordinates());
-		Direction newDirection = Direction.byPoint(newDirectionVector);
+		Point newDirectionVector = snake.getTail().getLocation().sub(snake.getTail().getPrev().getLocation());
+		Direction newDirection = Direction.fromPoint(newDirectionVector);
 		snake.justSetDirection(newDirection);
 
 		SnakeCell cell = snake.getHead();
@@ -43,7 +38,7 @@ public class ReverseCell extends BaseCell
 	}
 
 	@Override
-	public void acceptVisitor(PainterVisitor v, int x, int y)
+	public void acceptVisitor(SwingPainterVisitor v, int x, int y)
 	{
 		v.visitReverseCell(this, x, y);
 	}

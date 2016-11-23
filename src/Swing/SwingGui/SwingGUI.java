@@ -10,17 +10,17 @@ class SwingGUI implements IRenderer, ISnakeController
 {
 	private LevelWindow frame;
 
-	private Level level()
-	{
-		return frame.getLevel();
-	}
-
 	SwingGUI()
 	{
 		frame = new LevelWindow("Snake");
 		frame.setSize(500, 500);
 		frame.setUndecorated(true);
 		frame.setVisible(true);
+	}
+
+	private Level level()
+	{
+		return frame.getLevel();
 	}
 
 	@Override
@@ -35,7 +35,6 @@ class SwingGUI implements IRenderer, ISnakeController
 		frame.listener.resetCurrentDirection();
 		return res;
 	}
-
 
 	@Override
 	public Level selectLevel(LevelRepo repo)

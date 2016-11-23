@@ -1,27 +1,49 @@
 package Model.Cells;
 
 import Model.GameField;
+import Model.Point;
 import Model.Snake;
-import Swing.SwingGui.PainterVisitor;
+import Swing.SwingGui.SwingPainterVisitor;
 
-import java.awt.*;
 import java.io.Serializable;
 
 public abstract class BaseCell implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
-
-	public Color color;
+	public Point location;
 
 	BaseCell()
 	{
 	}
 
-	BaseCell(int x, int y)
+	BaseCell(int x, int y, int z)
 	{
+		location = new Point(x, y, z);
+	}
+
+	public Point getLocation()
+	{
+		return location;
 	}
 
 	public abstract void affectSnake(Snake snake, GameField field);
 
-	public abstract void acceptVisitor(PainterVisitor v, int x, int y);
+	public abstract void acceptVisitor(SwingPainterVisitor v, int x, int y);
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		BaseCell baseCell = (BaseCell) o;
+
+		return location != null ? location.equals(baseCell.location) : baseCell.location == null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return location != null ? location.hashCode() : 0;
+	}
 }

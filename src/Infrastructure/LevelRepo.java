@@ -9,13 +9,6 @@ import java.util.Objects;
 
 public class LevelRepo
 {
-	public void setLevelsDirectory(File levelsDirectory)
-	{
-		if (!levelsDirectory.isDirectory())
-			throw new IllegalArgumentException(String.format("%SaveListener is not directory", levelsDirectory.getAbsolutePath()));
-		this.levelsDirectory = levelsDirectory;
-	}
-
 	private File levelsDirectory;
 
 	public LevelRepo(String path)
@@ -41,12 +34,19 @@ public class LevelRepo
 					{
 						throw new RuntimeException(e);
 					}
-		throw new IllegalArgumentException(String.format("%SaveListener not found", levelName));
+		throw new IllegalArgumentException(String.format("%S not found", levelName));
 	}
 
 	public File getLevelsDirectory()
 	{
 		return levelsDirectory;
+	}
+
+	public void setLevelsDirectory(File levelsDirectory)
+	{
+		if (!levelsDirectory.isDirectory())
+			throw new IllegalArgumentException(String.format("%S is not directory", levelsDirectory.getAbsolutePath()));
+		this.levelsDirectory = levelsDirectory;
 	}
 
 	public boolean saveLevelToFile(Level level)

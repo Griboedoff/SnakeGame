@@ -1,8 +1,8 @@
 package Model;
 
-import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
-
 import java.io.Serializable;
+import java.security.InvalidParameterException;
+import java.util.HashMap;
 
 public enum Direction implements Serializable
 {
@@ -10,24 +10,26 @@ public enum Direction implements Serializable
 
 	private static final long serialVersionUID = 213456783;
 
-	public Point getVector()
+	private static final HashMap<String, Direction> fromString;
+	private static final HashMap<Direction, Direction> reverseDirection;
+
+	static
 	{
-		switch (this)
-		{
-			case UP:
-				return new Point(0, 1);
-			case DOWN:
-				return new Point(0, -1);
-			case RIGHT:
-				return new Point(1, 0);
-			case LEFT:
-				return new Point(-1, 0);
-			default:
-				return new Point(0, 0);
-		}
+		fromString = new HashMap<>();
+		fromString.put("UP", Direction.UP);
+		fromString.put("DOWN", Direction.DOWN);
+		fromString.put("RIGHT", Direction.RIGHT);
+		fromString.put("LEFT", Direction.LEFT);
+
+		reverseDirection = new HashMap<>();
+		reverseDirection.put(UP, DOWN);
+		reverseDirection.put(DOWN, UP);
+		reverseDirection.put(LEFT, RIGHT);
+		reverseDirection.put(RIGHT, LEFT);
+		reverseDirection.put(NONE, NONE);
 	}
 
-	public static Direction byPoint(Point point) throws ValueException
+	public static Direction fromPoint(Point point) throws InvalidParameterException
 	{
 		int x = point.getX();
 		int y = point.getY();
@@ -41,44 +43,40 @@ public enum Direction implements Serializable
 			return Direction.DOWN;
 		if (x == 0 && y == 0)
 			return Direction.NONE;
-		throw new ValueException("No direction for vector");
-	}
-
-	public Direction reverse()
-	{
-		switch (this)
-		{
-			case UP:
-				return DOWN;
-			case DOWN:
-				return UP;
-			case LEFT:
-				return RIGHT;
-			case RIGHT:
-				return LEFT;
-			default:
-				return NONE;
-		}
+		throw new InvalidParameterException("No direction for vector");
 	}
 
 	public static Direction fromString(Object selectedItem)
 	{
+
 		if (selectedItem instanceof String)
 		{
 			String direction = (String) selectedItem;
-			switch (direction)
-			{
-				case "UP":
-					return Direction.UP;
-				case "DOWN":
-					return Direction.DOWN;
-				case "RIGHT":
-					return Direction.RIGHT;
-				case "LEFT":
-					return Direction.LEFT;
-			}
+			return fromString.get(direction);
 		}
 		return NONE;
+	}
+
+	public Point getVector()
+	{
+		switch (this)
+		{
+			case UP:
+				return new Point(0, 1, 0);
+			case DOWN:
+				return new Point(0, -1, 0);
+			case RIGHT:
+				return new Point(1, 0, 0);
+			case LEFT:
+				return new Point(-1, 0, 0);
+			default:
+				return new Point(0, 0, 0);
+		}
+	}
+
+	public Direction reverse()
+	{
+		return reverseDirection.get(this);
 	}
 
 }

@@ -7,7 +7,6 @@ import Model.Level;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 
 class LevelWindow extends JFrame
 {
@@ -15,17 +14,6 @@ class LevelWindow extends JFrame
 	final JPanel panel;
 	SwingKeyListener listener;
 	private Level level;
-
-	public Level getLevel()
-	{
-		return level;
-	}
-
-	public void setLevel(Level level)
-	{
-		this.level = level;
-		setSize(level.getFieldWidth() * CELL_SIZE, level.getFieldHeight() * CELL_SIZE);
-	}
 
 	LevelWindow(String title)
 	{
@@ -37,7 +25,7 @@ class LevelWindow extends JFrame
 			{
 				if (level != null)
 				{
-					PainterVisitor v = new PainterVisitor(g, CELL_SIZE);
+					SwingPainterVisitor v = new SwingPainterVisitor(g, CELL_SIZE);
 					for (int x = 0; x < level.getFieldWidth(); x++)
 						for (int y = 0; y < level.getFieldHeight(); y++)
 						{
@@ -50,6 +38,17 @@ class LevelWindow extends JFrame
 		add(panel);
 		initListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public Level getLevel()
+	{
+		return level;
+	}
+
+	public void setLevel(Level level)
+	{
+		this.level = level;
+		setSize(level.getFieldWidth() * CELL_SIZE, level.getFieldHeight() * CELL_SIZE);
 	}
 
 	String showLevelSelectingDialog(LevelRepo repo)

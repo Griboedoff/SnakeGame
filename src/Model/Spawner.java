@@ -26,15 +26,14 @@ public class Spawner
 			}
 	}
 
-	public static void spawnMagic(GameField field)
-    {
-        BaseCell[] allCases = new BaseCell[] {new FoodCell(), new WallCell(), new PortalCell(),
-                                              new PoisonCell(), new ReverseCell()};
-        for (int i = allCases.length; i > 0; i--)
-            if (random.nextInt(i) == 0)
-            {
-                spawn(field, allCases[i - 1]);
-                break;
-            }
-    }
+	static void spawnRandom(GameField field)
+	{
+		BaseCell[] allCases = new BaseCell[]{new FoodCell(), new WallCell(), new PoisonCell(), new ReverseCell()};
+		for (int i = allCases.length; i > 0; i--)
+			if (random.nextInt(i) == 0)
+			{
+				spawn(field, allCases[i - 1]);
+				break;
+			}
+	}
 }

@@ -4,7 +4,6 @@ import Model.Cells.SnakeCell;
 
 import java.io.Serializable;
 
-@SuppressWarnings("SameReturnValue")
 public class Snake implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
@@ -15,14 +14,27 @@ public class Snake implements Serializable
 	private int length;
 	private boolean isAlive;
 
+	Snake(int xHead, int yHead, int zHead, Direction direction)
+	{
+		this(new Point(xHead, yHead, zHead), direction);
+	}
+
+	Snake(Point point, Direction direction)
+	{
+		head = new SnakeCell(point);
+		tail = head;
+		this.direction = direction;
+		isAlive = true;
+	}
+
 	boolean isAlive()
 	{
 		return isAlive;
 	}
 
-	public void setAlive(boolean alive)
+	public void setDead()
 	{
-		isAlive = alive;
+		isAlive = false;
 	}
 
 	public int getLength()
@@ -37,23 +49,19 @@ public class Snake implements Serializable
 
 	public void setDirection(Direction direction)
 	{
-		if (! (direction == this.direction.reverse()) )
-		this.direction = direction;
+		if (!(direction == this.direction.reverse()))
+			this.direction = direction;
 	}
 
 	public void justSetDirection(Direction direction)
-    {
-        this.direction = direction;
-    }
-
-	public void setHead(SnakeCell newHead)
 	{
-		if (newHead != null)
-			newHead.connectTo(this.head);
-		this.head = newHead;
+		this.direction = direction;
 	}
 
-	public void justSetHead(SnakeCell newHead) {this.head = newHead; }
+	public void justSetHead(SnakeCell newHead)
+	{
+		this.head = newHead;
+	}
 
 	public SnakeCell getTail()
 	{
@@ -70,17 +78,16 @@ public class Snake implements Serializable
 		return head;
 	}
 
-	public Point getNextMoveCell()
+	public void setHead(SnakeCell newHead)
 	{
-		return head.getCoordinates().add(direction.getVector());
+		if (newHead != null)
+			newHead.connectTo(this.head);
+		this.head = newHead;
 	}
 
-	Snake(int xHead, int yHead, Direction direction)
+	public Point getNextMoveCell()
 	{
-		head = new SnakeCell(xHead, yHead);
-		tail = head;
-		this.direction = direction;
-		isAlive = true;
+		return head.getLocation().add(direction.getVector());
 	}
 
 	public void updateHead(SnakeCell newHead)
@@ -96,5 +103,4 @@ public class Snake implements Serializable
 		tail.setNext(null);
 		length--;
 	}
-
 }

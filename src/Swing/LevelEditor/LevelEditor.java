@@ -31,7 +31,7 @@ public class LevelEditor
 		name = level.getName();
 	}
 
-	void changeSize(int x, int y) throws IllegalArgumentException
+	private void changeSize(int x, int y) throws IllegalArgumentException
 	{
 		if (x < 1 || y < 1)
 			throw new IllegalArgumentException("Field size must be greater than 0");
@@ -108,17 +108,17 @@ public class LevelEditor
 
 	String validate()
 	{
-        if (name == null || name.equals(""))
-            return "Nameless level is unacceptable";
-        if (direction == null)
-            return "The snake hasn't direction";
+		if (name == null || name.equals(""))
+			return "Nameless level is unacceptable";
+		if (direction == null)
+			return "The snake hasn't direction";
 		int snakesAmount = 0;
-        for (int x = 0; x < getSize().getX(); x++)
-            for (int y = 0; y < getSize().getY(); y++)
-                if (field.getCell(x, y) instanceof SnakeCell)
-                    snakesAmount++;
-        if (snakesAmount != 1)
-            return "Amount of snakes must be equal to one";
-        return "OK";
+		for (int x = 0; x < getSize().getX(); x++)
+			for (int y = 0; y < getSize().getY(); y++)
+				if (field.getCell(x, y) instanceof SnakeCell)
+					snakesAmount++;
+		if (snakesAmount != 1)
+			return "Amount of snakes must be equal to one";
+		return "OK";
 	}
 }

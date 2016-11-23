@@ -4,7 +4,7 @@ import Infrastructure.LevelRepo;
 import Model.Cells.*;
 import Model.Direction;
 import Model.Level;
-import Swing.SwingGui.PainterVisitor;
+import Swing.SwingGui.SwingPainterVisitor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,6 +48,28 @@ public class Window extends JFrame
 		levelNameField.setText(editor.getName());
 		xValueSpinner.setValue(editor.getField().getWidth());
 		yValueSpinner.setValue(editor.getField().getHeight());
+	}
+
+	public static void main(String[] args)
+	{
+		JFrame frame = new JFrame("Window");
+		Window window = new Window(selectLevelFile());
+		frame.setContentPane(window.root);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+	private static File selectLevelFile()
+	{
+		JFileChooser chooser = new JFileChooser();
+		chooser.showDialog(null, "Choose file");
+		return chooser.getSelectedFile();
+	}
+
+	private static Model.Point getCellLocationFromAwtPoint(java.awt.Point awtPoint)
+	{
+		return new Model.Point(awtPoint.x / CELL_SIZE, awtPoint.y / CELL_SIZE);
 	}
 
 	private void getLevelEditor(File levelFile)
@@ -158,11 +180,6 @@ public class Window extends JFrame
 		button.setEnabled(false);
 	}
 
-	private Model.Point getCellLocationFromAwtPoint(java.awt.Point awtPoint)
-	{
-		return new Model.Point(awtPoint.x / CELL_SIZE, awtPoint.y / CELL_SIZE);
-	}
-
 	private void createUIComponents()
 	{
 		field = new JPanel()
@@ -170,7 +187,7 @@ public class Window extends JFrame
 			@Override
 			public void paintComponent(Graphics g)
 			{
-				PainterVisitor v = new PainterVisitor(g, CELL_SIZE);
+				SwingPainterVisitor v = new SwingPainterVisitor(g, CELL_SIZE);
 				for (int x = 0; x < editor.getField().getWidth(); x++)
 					for (int y = 0; y < editor.getField().getHeight(); y++)
 					{
@@ -181,22 +198,5 @@ public class Window extends JFrame
 					}
 			}
 		};
-	}
-
-	public static void main(String[] args)
-	{
-		JFrame frame = new JFrame("Window");
-		Window window = new Window(selectLevelFile());
-		frame.setContentPane(window.root);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.pack();
-		frame.setVisible(true);
-	}
-
-	private static File selectLevelFile()
-	{
-		JFileChooser chooser = new JFileChooser();
-		chooser.showDialog(null, "Choose file");
-		return chooser.getSelectedFile();
 	}
 }
