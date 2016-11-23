@@ -2,7 +2,7 @@ package Model;
 
 import java.io.Serializable;
 
-public class Point implements Serializable
+public class Point3d implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
 
@@ -10,7 +10,7 @@ public class Point implements Serializable
 	private int y;
 	private int z;
 
-	public Point(int x, int y, int z)
+	public Point3d(int x, int y, int z)
 	{
 		this.x = x;
 		this.y = y;
@@ -35,7 +35,7 @@ public class Point implements Serializable
 	@Override
 	public String toString()
 	{
-		return "Point{" +
+		return "Point3d{" +
 				"x=" + x +
 				", y=" + y +
 				", z=" + z +
@@ -48,7 +48,7 @@ public class Point implements Serializable
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		Point point = (Point) o;
+		Point3d point = (Point3d) o;
 
 		return x == point.x && y == point.y && z == point.z;
 	}
@@ -62,14 +62,14 @@ public class Point implements Serializable
 		return result;
 	}
 
-	Point add(Point other)
+	Point3d add(Point3d other)
 	{
-		return new Point(x + other.x, y + other.y, z + other.z);
+		return new Point3d(x + other.x, y + other.y, z + other.z);
 	}
 
-	public Point sub(Point other)
+	public Point3d sub(Point3d other)
 	{
-		return new Point(x - other.x, y - other.y, z - other.z);
+		return new Point3d(x - other.x, y - other.y, z - other.z);
 	}
 
 	public boolean isPositive()

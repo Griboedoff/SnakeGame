@@ -23,14 +23,14 @@ public class Level implements Serializable
 	private Space space;
 	private ICellSelector selector;
 
-	private Level(String name, Point snakeP, Direction direction)
+	private Level(String name, Point3d snakeP, Direction direction)
 	{
 		this.name = name;
 		snake = new Snake(snakeP, direction);
 		Spawner.spawn(field, new FoodCell());
 		random = new Random();
 		magic = 30;
-		field = space.getSection(new Point(0, 0, 1));
+		field = space.getSection(new Point3d(0, 0, 1));
 		field.setCell(snake.getHead().getLocation(), snake.getHead(), selector);
 	}
 
@@ -90,7 +90,7 @@ public class Level implements Serializable
 	{
 		if (direction != null && direction != Direction.NONE)
 			snake.setDirection(direction);
-		Point nextCell = snake.getNextMoveCell();
+		Point3d nextCell = snake.getNextMoveCell();
 		boolean inField = field.isInField(nextCell);
 		if (inField)
 			field.getCell(nextCell.getX(), nextCell.getY()).affectSnake(snake, field);

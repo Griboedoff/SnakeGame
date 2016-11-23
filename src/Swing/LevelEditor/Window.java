@@ -4,6 +4,7 @@ import Infrastructure.LevelRepo;
 import Model.Cells.*;
 import Model.Direction;
 import Model.Level;
+import Model.Point3d;
 import Swing.SwingGui.SwingPainterVisitor;
 
 import javax.swing.*;
@@ -67,9 +68,9 @@ public class Window extends JFrame
 		return chooser.getSelectedFile();
 	}
 
-	private static Model.Point getCellLocationFromAwtPoint(java.awt.Point awtPoint)
+	private static Point3d getCellLocationFromAwtPoint(java.awt.Point awtPoint)
 	{
-		return new Model.Point(awtPoint.x / CELL_SIZE, awtPoint.y / CELL_SIZE);
+		return new Point3d(awtPoint.x / CELL_SIZE, awtPoint.y / CELL_SIZE);
 	}
 
 	private void getLevelEditor(File levelFile)

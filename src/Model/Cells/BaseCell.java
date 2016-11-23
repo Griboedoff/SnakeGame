@@ -1,7 +1,7 @@
 package Model.Cells;
 
 import Model.GameField;
-import Model.Point;
+import Model.Point3d;
 import Model.Snake;
 import Swing.SwingGui.SwingPainterVisitor;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
 public abstract class BaseCell implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
-	public Point location;
+	public Point3d location;
 
 	BaseCell()
 	{
@@ -18,10 +18,10 @@ public abstract class BaseCell implements Serializable
 
 	BaseCell(int x, int y, int z)
 	{
-		location = new Point(x, y, z);
+		location = new Point3d(x, y, z);
 	}
 
-	public Point getLocation()
+	public Point3d getLocation()
 	{
 		return location;
 	}

@@ -29,7 +29,7 @@ public enum Direction implements Serializable
 		reverseDirection.put(NONE, NONE);
 	}
 
-	public static Direction fromPoint(Point point) throws InvalidParameterException
+	public static Direction fromPoint(Point3d point) throws InvalidParameterException
 	{
 		int x = point.getX();
 		int y = point.getY();
@@ -57,20 +57,20 @@ public enum Direction implements Serializable
 		return NONE;
 	}
 
-	public Point getVector()
+	public Point3d getVector()
 	{
 		switch (this)
 		{
 			case UP:
-				return new Point(0, 1, 0);
+				return new Point3d(0, 1, 0);
 			case DOWN:
-				return new Point(0, -1, 0);
+				return new Point3d(0, -1, 0);
 			case RIGHT:
-				return new Point(1, 0, 0);
+				return new Point3d(1, 0, 0);
 			case LEFT:
-				return new Point(-1, 0, 0);
+				return new Point3d(-1, 0, 0);
 			default:
-				return new Point(0, 0, 0);
+				return new Point3d(0, 0, 0);
 		}
 	}
 

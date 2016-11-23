@@ -2,5 +2,5 @@ package Model;
 
 public interface ICellSelector
 {
-	Point selectCell(Point p);
+	Point3d selectCell(Point3d p);
 }

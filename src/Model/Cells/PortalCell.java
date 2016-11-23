@@ -1,7 +1,7 @@
 //package Model.Cells;
 //
 //import Model.GameField;
-//import Model.Point;
+//import Model.Point3d;
 //import Model.Snake;
 //import Swing.SwingGui.SwingPainterVisitor;
 //
@@ -26,12 +26,12 @@
 //	@Override
 //	public void affectSnake(Snake snake, GameField field)
 //	{
-//		ArrayList<Point> allPortals = new ArrayList<>();
+//		ArrayList<Point3d> allPortals = new ArrayList<>();
 //		for (int y = 0; y < field.getHeight(); y++)
 //			for (int x = 0; x < field.getWidth(); x++)
 //				if (field.getCell(x, y) instanceof PortalCell)
-//					allPortals.add(new Point(x, y));
-//		Point newCoordinates = allPortals.get(random.nextInt(allPortals.size()));
+//					allPortals.add(new Point3d(x, y));
+//		Point3d newCoordinates = allPortals.get(random.nextInt(allPortals.size()));
 //		SnakeCell newHead = new SnakeCell(newCoordinates);
 //		snake.updateHead(newHead);
 //		field.setCell(newHead.getLocation().getX(), newHead.getLocation().getY(), newHead);

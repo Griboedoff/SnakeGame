@@ -1,7 +1,7 @@
 package Model.Cells;
 
 import Model.GameField;
-import Model.Point;
+import Model.Point3d;
 import Model.Snake;
 import Swing.SwingGui.SwingPainterVisitor;
 
@@ -10,7 +10,7 @@ public class SnakeCell extends BaseCell
 	private SnakeCell prev;
 	private SnakeCell next;
 
-	public SnakeCell(Point p)
+	public SnakeCell(Point3d p)
 	{
 		location = p;
 	}

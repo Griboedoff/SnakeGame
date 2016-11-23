@@ -2,7 +2,7 @@ package Model.Cells;
 
 import Model.Direction;
 import Model.GameField;
-import Model.Point;
+import Model.Point3d;
 import Model.Snake;
 import Swing.SwingGui.SwingPainterVisitor;
 
@@ -19,7 +19,7 @@ public class ReverseCell extends BaseCell
 		snake.updateHead(newHead);
 		field.setCell(newHead.getLocation().getX(), newHead.getLocation().getY(), newHead);
 
-		Point newDirectionVector = snake.getTail().getLocation().sub(snake.getTail().getPrev().getLocation());
+		Point3d newDirectionVector = snake.getTail().getLocation().sub(snake.getTail().getPrev().getLocation());
 		Direction newDirection = Direction.fromPoint(newDirectionVector);
 		snake.justSetDirection(newDirection);
 

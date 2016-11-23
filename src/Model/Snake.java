@@ -16,10 +16,10 @@ public class Snake implements Serializable
 
 	Snake(int xHead, int yHead, int zHead, Direction direction)
 	{
-		this(new Point(xHead, yHead, zHead), direction);
+		this(new Point3d(xHead, yHead, zHead), direction);
 	}
 
-	Snake(Point point, Direction direction)
+	Snake(Point3d point, Direction direction)
 	{
 		head = new SnakeCell(point);
 		tail = head;
@@ -85,7 +85,7 @@ public class Snake implements Serializable
 		this.head = newHead;
 	}
 
-	public Point getNextMoveCell()
+	public Point3d getNextMoveCell()
 	{
 		return head.getLocation().add(direction.getVector());
 	}

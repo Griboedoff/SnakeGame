@@ -43,9 +43,9 @@ public class GameField implements Serializable
 		return field[x][y];
 	}
 
-	BaseCell getCell(Point point, ICellSelector cellSelector)
+	BaseCell getCell(Point3d point, ICellSelector cellSelector)
 	{
-		Point p = cellSelector.selectCell(point);
+		Point3d p = cellSelector.selectCell(point);
 		return getCell(p.getX(), p.getY());
 	}
 
@@ -57,9 +57,9 @@ public class GameField implements Serializable
 	}
 
 
-	public void setCell(Point point, BaseCell newCell, ICellSelector cellSelector)
+	public void setCell(Point3d point, BaseCell newCell, ICellSelector cellSelector)
 	{
-		Point p = cellSelector.selectCell(point);
+		Point3d p = cellSelector.selectCell(point);
 		setCell(p.getX(), p.getY(), newCell);
 	}
 
@@ -68,7 +68,7 @@ public class GameField implements Serializable
 		return 0 <= x && x < getWidth() && 0 <= y && y < getHeight();
 	}
 
-	public boolean isInField(Point point)
+	public boolean isInField(Point3d point)
 	{
 		return isInField(point.getX(), point.getY());
 	}

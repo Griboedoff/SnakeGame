@@ -5,7 +5,7 @@ import Model.Cells.SnakeCell;
 import Model.Direction;
 import Model.GameField;
 import Model.Level;
-import Model.Point;
+import Model.Point3d;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -20,7 +20,7 @@ public class LevelEditor
 
 	LevelEditor()
 	{
-		Point defaultSize = new Point(30, 20);
+		Point3d defaultSize = new Point3d(30, 20);
 		field = new GameField(defaultSize.getX(), defaultSize.getY());
 	}
 
@@ -42,7 +42,7 @@ public class LevelEditor
 		field = newField;
 	}
 
-	public void changeSize(Point p) throws IndexOutOfBoundsException
+	public void changeSize(Point3d p) throws IndexOutOfBoundsException
 	{
 		changeSize(p.getX(), p.getY());
 	}
@@ -52,12 +52,12 @@ public class LevelEditor
 		return field;
 	}
 
-	private Point getSize()
+	private Point3d getSize()
 	{
-		return new Point(field.getWidth(), field.getHeight());
+		return new Point3d(field.getWidth(), field.getHeight());
 	}
 
-	void setCell(Point p, Class<?> cellClass)
+	void setCell(Point3d p, Class<?> cellClass)
 	{
 		if (!field.isInField(p))
 			return;
@@ -97,12 +97,12 @@ public class LevelEditor
 		direction = newDirection;
 	}
 
-	public Point getSnakeCoordinates() throws SnakeNotFoundException
+	public Point3d getSnakeCoordinates() throws SnakeNotFoundException
 	{
 		for (int x = 0; x < getSize().getX(); x++)
 			for (int y = 0; y < getSize().getY(); y++)
 				if (field.getCell(x, y) instanceof SnakeCell)
-					return new Point(x, y);
+					return new Point3d(x, y);
 		throw new SnakeNotFoundException("Can't find snake");
 	}
 
