@@ -1,7 +1,7 @@
 package Model;
 
 import Infrastructure.IRenderer;
-import Infrastructure.ISnakeController;
+import Infrastructure.IGameController;
 import Infrastructure.LevelRepo;
 
 public class Engine
@@ -9,29 +9,28 @@ public class Engine
 	private int defaultGameLownessMS = 300;
 	private LevelRepo levelRepo;
 	private Level currentLevel;
-	private ISnakeController snakeController;
+	private IGameController gameController;
 	private IRenderer renderer;
 
-	public Engine(String pathToLevelRepo, ISnakeController snakeController, IRenderer renderer)
+	public Engine(String pathToLevelRepo, IGameController snakeController, IRenderer renderer)
 	{
 		levelRepo = new LevelRepo(pathToLevelRepo);
-		this.snakeController = snakeController;
+		this.gameController = snakeController;
 		this.renderer = renderer;
 	}
 
-	public void run() throws InterruptedException
-	{
-		while (true)
-		{
-			currentLevel = renderer.selectLevel(levelRepo);
-			while (!currentLevel.isOver())
-			{
-				Direction direction = snakeController.getNewDirection();
-				currentLevel.tick(direction);
-				renderer.renderLevel(currentLevel);
-				Thread.sleep(defaultGameLownessMS);
-			}
-			renderer.renderGameEnd(false);
-		}
-	}
+    public void run() throws InterruptedException
+    {
+        currentLevel = new Level("Test", new Point3d(10, 10, 10), Direction.UP);
+        while (!currentLevel.isOver())
+        {
+            int viewCoord = gameController.getNewViewCoord();
+            currentLevel.rotate(viewCoord);
+            Direction direction = gameController.getNewDirection();
+            currentLevel.tick(direction);
+            renderer.renderLevel(currentLevel);
+            Thread.sleep(defaultGameLownessMS);
+        }
+        renderer.renderGameEnd(false);
+    }
 }

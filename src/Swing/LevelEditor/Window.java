@@ -1,3 +1,4 @@
+/*
 package Swing.LevelEditor;
 
 import Infrastructure.LevelRepo;
@@ -201,3 +202,4 @@ public class Window extends JFrame
 		};
 	}
 }
+*/

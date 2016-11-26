@@ -1,19 +1,17 @@
 package Model.Cells;
 
-import Model.GameField;
-import Model.Snake;
-import Model.Spawner;
+import Model.*;
 import Swing.SwingGui.SwingPainterVisitor;
 
 public class FoodCell extends BaseCell
 {
 	@Override
-	public void affectSnake(Snake snake, GameField field)
+	public void affectSnake(Snake snake, Point3d fieldVector, Space space)
 	{
 		SnakeCell newHead = new SnakeCell(snake.getNextMoveCell());
 		snake.updateHead(newHead);
-		field.setCell(newHead.getLocation().getX(), newHead.getLocation().getY(), newHead);
-		Spawner.spawn(field, new FoodCell());
+		space.setCell(newHead.getLocation(), newHead);
+		Spawner.spawnOnSection(space, fieldVector, new FoodCell());
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public abstract class BaseCell implements Serializable
 		return location;
 	}
 
-	public abstract void affectSnake(Snake snake, GameField field, Space space);
+	public abstract void affectSnake(Snake snake, Point3d fieldVector, Space space);
 
 	public abstract void acceptVisitor(SwingPainterVisitor v, int x, int y);
 

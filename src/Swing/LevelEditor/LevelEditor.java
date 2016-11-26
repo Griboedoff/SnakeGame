@@ -1,3 +1,4 @@
+/*
 package Swing.LevelEditor;
 
 import Model.Cells.BaseCell;
@@ -122,3 +123,4 @@ public class LevelEditor
 		return "OK";
 	}
 }
+*/

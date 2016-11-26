@@ -1,12 +1,12 @@
 package Swing.SwingGui;
 
 import Infrastructure.IRenderer;
-import Infrastructure.ISnakeController;
+import Infrastructure.IGameController;
 import Infrastructure.LevelRepo;
 import Model.Direction;
 import Model.Level;
 
-class SwingGUI implements IRenderer, ISnakeController
+class SwingGUI implements IRenderer, IGameController
 {
 	private LevelWindow frame;
 
@@ -35,6 +35,12 @@ class SwingGUI implements IRenderer, ISnakeController
 		frame.listener.resetCurrentDirection();
 		return res;
 	}
+
+    @Override
+    public int getNewViewCoord()
+    {
+        return frame.listener.getViewCoord();
+    }
 
 	@Override
 	public Level selectLevel(LevelRepo repo)

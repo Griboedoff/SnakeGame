@@ -1,9 +1,6 @@
 package Model.Cells;
 
-import Model.Direction;
-import Model.GameField;
-import Model.Point3d;
-import Model.Snake;
+import Model.*;
 import Swing.SwingGui.SwingPainterVisitor;
 
 public class ReverseCell extends BaseCell
@@ -13,15 +10,14 @@ public class ReverseCell extends BaseCell
 	}
 
 	@Override
-	public void affectSnake(Snake snake, GameField field)
+	public void affectSnake(Snake snake, Point3d fieldVector, Space space)
 	{
 		SnakeCell newHead = new SnakeCell(snake.getNextMoveCell());
 		snake.updateHead(newHead);
-		field.setCell(newHead.getLocation().getX(), newHead.getLocation().getY(), newHead);
+		space.setCell(newHead.getLocation(), newHead);
 
 		Point3d newDirectionVector = snake.getTail().getLocation().sub(snake.getTail().getPrev().getLocation());
-		Direction newDirection = Direction.fromPoint(newDirectionVector);
-		snake.justSetDirection(newDirection);
+		snake.justSetDirection(newDirectionVector);
 
 		SnakeCell cell = snake.getHead();
 		while (cell != null)

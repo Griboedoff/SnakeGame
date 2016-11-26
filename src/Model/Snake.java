@@ -49,6 +49,8 @@ public class Snake implements Serializable
 
 	public void setVectorDirection(Point3d vectorDirection)
 	{
+		if (vectorDirection.getLength() != 1)
+		    throw new IllegalArgumentException("Direction must have length 1");
 		if (! this.vectorDirection.add(vectorDirection).equals(new Point3d(0, 0, 0)))
 			this.vectorDirection = vectorDirection;
 	}
