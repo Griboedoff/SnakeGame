@@ -2,6 +2,7 @@ package Model;
 
 import Model.Cells.BaseCell;
 import Model.Cells.EmptyCell;
+import Model.Cells.WallCell;
 import Model.Exceptions.SpaceCreationException;
 
 import java.util.HashMap;
@@ -121,6 +122,24 @@ public class Space
     public static Space getTestSpace()
     {
         HashMap<Point3d, BaseCell> cells = new HashMap<Point3d, BaseCell>();
-        return new Space(cells, new Point3d(20, 20, 20));
+        int size = 20;
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 1; j < size; j += size - 3)
+                for (int k = 1; k < size; k += size - 3)
+                {
+                    cells.put(new Point3d(i, j, k), new WallCell());
+                    cells.put(new Point3d(j, i, k), new WallCell());
+                    cells.put(new Point3d(j, k, i), new WallCell());
+                }
+            for (int j = 0; j < size; j += size - 1)
+                for (int k = 0; k < size; k += size - 1)
+                {
+                    cells.put(new Point3d(i, j, k), new WallCell());
+                    cells.put(new Point3d(j, i, k), new WallCell());
+                    cells.put(new Point3d(j, k, i), new WallCell());
+                }
+        }
+        return new Space(cells, new Point3d(size, size, size));
     }
 }

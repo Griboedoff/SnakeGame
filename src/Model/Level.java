@@ -25,18 +25,20 @@ public class Level implements Serializable
 	private int magic;
 	private Space space;
     private Point3d fieldVector;
+    private int coordNum;
 
 	public Level(String name, Point3d snakeP, Direction direction)
 	{
 		this.name = name;
         space = Space.getTestSpace();
         fieldVector = new Point3d(-1, -1, snakeP.getZ());
+        coordNum = 2;
         field = space.getSection(fieldVector);
         snake = new Snake(snakeP, directionToPoint3D(direction, fieldVector));
         space.setCell(snake.getHead().getLocation(), snake.getHead());
         Spawner.spawnOnSection(space, fieldVector, new FoodCell());
         random = new Random();
-        magic = 30;
+        magic = 2;
 	}
 	/*
 	public static Level fromLevelEditor(LevelEditor editor) throws SnakeNotFoundException
@@ -117,6 +119,7 @@ public class Level implements Serializable
 
 	public void rotate(int coordNum) throws IllegalArgumentException
     {
+        this.coordNum = coordNum;
         Point3d snakeLocation = snake.getHead().getLocation();
         switch (coordNum){
             case 0:
