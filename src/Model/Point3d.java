@@ -8,9 +8,9 @@ public class Point3d implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
 
-	private int x;
-	private int y;
-	private int z;
+	private final int x;
+	private final int y;
+	private final int z;
 
 	public Point3d(int x, int y, int z)
 	{
@@ -34,7 +34,10 @@ public class Point3d implements Serializable
 		return z;
 	}
 
-	public int getLength() { return abs(x) + abs(y) + abs(z); }
+	public int getLength()
+	{
+		return abs(x) + abs(y) + abs(z);
+	}
 
 	@Override
 	public String toString()

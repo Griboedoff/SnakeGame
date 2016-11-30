@@ -1,6 +1,5 @@
 package Model.Cells;
 
-import Model.GameField;
 import Model.Point3d;
 import Model.Snake;
 import Model.Space;

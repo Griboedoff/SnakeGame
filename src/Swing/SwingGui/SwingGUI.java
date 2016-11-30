@@ -1,18 +1,18 @@
 package Swing.SwingGui;
 
-import Infrastructure.IRenderer;
 import Infrastructure.IGameController;
+import Infrastructure.IRenderer;
 import Infrastructure.LevelRepo;
 import Model.Direction;
 import Model.Level;
 
 class SwingGUI implements IRenderer, IGameController
 {
-	private LevelWindow frame;
+	private final LevelWindow frame;
 
 	SwingGUI()
 	{
-		frame = new LevelWindow("Snake");
+		frame = new LevelWindow();
 		frame.setSize(500, 500);
 		frame.setUndecorated(true);
 		frame.setVisible(true);
@@ -36,11 +36,11 @@ class SwingGUI implements IRenderer, IGameController
 		return res;
 	}
 
-    @Override
-    public int getNewViewCoord()
-    {
-        return frame.listener.getViewCoord();
-    }
+	@Override
+	public int getNewViewCoord()
+	{
+		return frame.listener.getViewCoord();
+	}
 
 	@Override
 	public Level selectLevel(LevelRepo repo)

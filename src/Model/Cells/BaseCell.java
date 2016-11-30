@@ -1,6 +1,5 @@
 package Model.Cells;
 
-import Model.GameField;
 import Model.Point3d;
 import Model.Snake;
 import Model.Space;
@@ -11,7 +10,7 @@ import java.io.Serializable;
 public abstract class BaseCell implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
-	public Point3d location;
+	Point3d location;
 
 	BaseCell()
 	{

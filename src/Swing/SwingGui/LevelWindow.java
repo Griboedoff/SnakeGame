@@ -15,9 +15,9 @@ class LevelWindow extends JFrame
 	SwingKeyListener listener;
 	private Level level;
 
-	LevelWindow(String title)
+	LevelWindow()
 	{
-		super(title);
+		super("Snakr");
 		panel = new JPanel()
 		{
 			@Override

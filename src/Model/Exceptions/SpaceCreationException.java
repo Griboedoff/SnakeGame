@@ -1,6 +1,6 @@
 package Model.Exceptions;
 
-public class SpaceCreationException extends Exception
+class SpaceCreationException extends Exception
 {
 	public SpaceCreationException(String message)
 	{

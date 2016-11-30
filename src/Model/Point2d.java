@@ -8,8 +8,8 @@ public class Point2d implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
 
-	private int x;
-	private int y;
+	private final int x;
+	private final int y;
 
 	public Point2d(int x, int y)
 	{
@@ -27,7 +27,10 @@ public class Point2d implements Serializable
 		return y;
 	}
 
-	public int getLength() {return abs(x) + abs(y); }
+	public int getLength()
+	{
+		return abs(x) + abs(y);
+	}
 
 	@Override
 	public String toString()

@@ -10,7 +10,7 @@ public class GameField implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
 
-	private BaseCell[][] field;
+	private final BaseCell[][] field;
 
 
 	public GameField(int width, int height)
@@ -43,7 +43,10 @@ public class GameField implements Serializable
 		return field[x][y];
 	}
 
-	public BaseCell getCell(Point2d point) { return getCell(point.getX(), point.getY()); }
+	public BaseCell getCell(Point2d point)
+	{
+		return getCell(point.getX(), point.getY());
+	}
 
 	public void setCell(int x, int y, BaseCell newCell) throws IndexOutOfBoundsException
 	{
@@ -52,13 +55,20 @@ public class GameField implements Serializable
 		field[x][y] = newCell;
 	}
 
-	public void setCell(Point2d point, BaseCell newCell) { setCell(point.getX(), point.getY(), newCell); }
+	public void setCell(Point2d point, BaseCell newCell)
+	{
+		setCell(point.getX(), point.getY(), newCell);
+	}
 
-	public boolean isInField(int x, int y)
+	private boolean isInField(int x, int y)
 	{
 		return 0 <= x && x < getWidth() && 0 <= y && y < getHeight();
 	}
-	public boolean isInField(Point2d point) { return isInField(point.getX(), point.getY()); }
+
+	public boolean isInField(Point2d point)
+	{
+		return isInField(point.getX(), point.getY());
+	}
 
 	int countEmptyCells()
 	{

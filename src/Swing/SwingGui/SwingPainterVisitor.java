@@ -7,8 +7,8 @@ import java.awt.*;
 public class SwingPainterVisitor
 
 {
-	private Graphics graphics;
-	private int cellSize;
+	private final Graphics graphics;
+	private final int cellSize;
 
 	public SwingPainterVisitor(Graphics graphics, int cellSize)
 	{

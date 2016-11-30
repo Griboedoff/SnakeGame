@@ -1,6 +1,6 @@
 package Swing.LevelEditor;
 
-public class SnakeNotFoundException extends Exception
+class SnakeNotFoundException extends Exception
 {
 	SnakeNotFoundException(String message)
 	{

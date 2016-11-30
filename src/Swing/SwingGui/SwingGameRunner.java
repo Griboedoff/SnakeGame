@@ -2,7 +2,7 @@ package Swing.SwingGui;
 
 import Model.Engine;
 
-public class SwingGameRunner
+class SwingGameRunner
 {
 	public static void main(String[] args)
 	{

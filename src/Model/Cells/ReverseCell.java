@@ -1,6 +1,8 @@
 package Model.Cells;
 
-import Model.*;
+import Model.Point3d;
+import Model.Snake;
+import Model.Space;
 import Swing.SwingGui.SwingPainterVisitor;
 
 public class ReverseCell extends BaseCell
