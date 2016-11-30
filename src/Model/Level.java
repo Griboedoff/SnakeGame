@@ -9,16 +9,11 @@ import java.util.Random;
 
 import static Model.PointTranslator.directionToPoint3D;
 
-//import Swing.LevelEditor.LevelEditor;
-//import Swing.LevelEditor.SnakeNotFoundException;
-
-
 public class Level implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
 	private String name;
 	private GameField field;
-	//private int currentLevel;
 	private final Snake snake;
 	private boolean isOver;
 	private final Random random;
@@ -94,7 +89,7 @@ public class Level implements Serializable
 		return snake.getHead();
 	}
 
-	void tick(Direction direction)
+	public void tick(Direction direction)
 	{
 		field = space.getSection(fieldVector);
 		if (direction != null && direction != Direction.NONE)
@@ -122,7 +117,7 @@ public class Level implements Serializable
 	{
 		this.coordNum = coordNum;
 		Point3d snakeLocation = snake.getHead().getLocation();
-		switch (coordNum)
+		switch (this.coordNum)
 		{
 			case 0:
 				fieldVector = new Point3d(snakeLocation.getX(), -1, -1);
@@ -137,6 +132,4 @@ public class Level implements Serializable
 				throw new IllegalArgumentException("coordNum must be in {0, 1, 2}");
 		}
 	}
-
-
 }

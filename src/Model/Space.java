@@ -11,7 +11,7 @@ public class Space
 	private final HashMap<Point3d, BaseCell> cells;
 	private final Point3d size;
 
-	private Space(HashMap<Point3d, BaseCell> cells, Point3d size) //throws SpaceCreationException
+	private Space(HashMap<Point3d, BaseCell> cells, Point3d size)
 	{
 		this.cells = cells;
 		this.size = size;
@@ -23,22 +23,24 @@ public class Space
 		int size = 20;
 		for (int i = 0; i < size; i++)
 		{
-			for (int j = 1; j < size; j += size - 3)
-				for (int k = 1; k < size; k += size - 3)
-				{
-					cells.put(new Point3d(i, j, k), new WallCell());
-					cells.put(new Point3d(j, i, k), new WallCell());
-					cells.put(new Point3d(j, k, i), new WallCell());
-				}
-			for (int j = 0; j < size; j += size - 1)
-				for (int k = 0; k < size; k += size - 1)
-				{
-					cells.put(new Point3d(i, j, k), new WallCell());
-					cells.put(new Point3d(j, i, k), new WallCell());
-					cells.put(new Point3d(j, k, i), new WallCell());
-				}
+			putWallWithOffset(cells, size, i, 3);
+			putWallWithOffset(cells, size, i, 1);
 		}
 		return new Space(cells, new Point3d(size, size, size));
+	}
+
+	private static void putWallWithOffset(HashMap<Point3d, BaseCell> cells, int size, int i, int offset)
+	{
+		for (int j = 1; j < size; j += size - offset)
+			for (int k = 1; k < size; k += size - offset)
+				putWallInEveryCorner(cells, i, j, k);
+	}
+
+	private static void putWallInEveryCorner(HashMap<Point3d, BaseCell> cells, int i, int j, int k)
+	{
+		cells.put(new Point3d(i, j, k), new WallCell());
+		cells.put(new Point3d(j, i, k), new WallCell());
+		cells.put(new Point3d(j, k, i), new WallCell());
 	}
 
 	GameField getSection(Point3d p)
@@ -103,7 +105,7 @@ public class Space
 	BaseCell getCell(Point3d point) throws IllegalArgumentException
 	{
 		if (!isInSpace(point))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Point " + point.toString() + " is outside space boundaries");
 		if (!cells.containsKey(point))
 			return new EmptyCell();
 		return cells.get(point);
@@ -118,9 +120,8 @@ public class Space
 	{
 		if (!isInSpace(point))
 			throw new IllegalArgumentException();
-		if (cell instanceof EmptyCell)
-			if (cells.containsKey(point))
-				cells.remove(point);
+		if (cell instanceof EmptyCell && cells.containsKey(point))
+			cells.remove(point);
 		cells.put(point, cell);
 	}
 

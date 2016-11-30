@@ -12,17 +12,14 @@ class SwingKeyListener implements KeyListener
 
 	Direction getCurrentDirection()
 	{
-		return currentDirection;
+		Direction currDir = currentDirection;
+		this.currentDirection = Direction.NONE;
+		return currDir;
 	}
 
 	int getViewCoord()
 	{
 		return viewCoord;
-	}
-
-	void resetCurrentDirection()
-	{
-		this.currentDirection = Direction.NONE;
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package Swing.SwingGui;
 import Infrastructure.IGameController;
 import Infrastructure.IRenderer;
 import Infrastructure.LevelRepo;
-import Model.Direction;
 import Model.Level;
 
 class SwingGUI implements IRenderer, IGameController
@@ -18,35 +17,17 @@ class SwingGUI implements IRenderer, IGameController
 		frame.setVisible(true);
 	}
 
-	private Level level()
-	{
-		return frame.getLevel();
-	}
-
 	@Override
-	public Direction getNewDirection()
+	public void updateLevel(Level level)
 	{
-		return getNextDirection();
-	}
-
-	private Direction getNextDirection()
-	{
-		Direction res = frame.listener.getCurrentDirection();
-		frame.listener.resetCurrentDirection();
-		return res;
-	}
-
-	@Override
-	public int getNewViewCoord()
-	{
-		return frame.listener.getViewCoord();
+		level.rotate(frame.listener.getViewCoord());
+		level.tick(frame.listener.getCurrentDirection());
 	}
 
 	@Override
 	public Level selectLevel(LevelRepo repo)
 	{
-		String name = frame.showLevelSelectingDialog(repo);
-		return repo.getLevelFromFile(name);
+		return repo.getLevelFromFile(frame.showLevelSelectingDialog(repo));
 	}
 
 	@Override

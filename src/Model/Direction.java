@@ -48,12 +48,8 @@ public enum Direction implements Serializable
 
 	public static Direction fromString(Object selectedItem)
 	{
-
 		if (selectedItem instanceof String)
-		{
-			String direction = (String) selectedItem;
-			return fromString.get(direction);
-		}
+			return fromString.get(selectedItem);
 		return NONE;
 	}
 
@@ -78,5 +74,4 @@ public enum Direction implements Serializable
 	{
 		return reverseDirection.get(this);
 	}
-
 }

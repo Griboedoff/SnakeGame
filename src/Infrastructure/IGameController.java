@@ -1,10 +1,8 @@
 package Infrastructure;
 
-import Model.Direction;
+import Model.Level;
 
 public interface IGameController
 {
-	Direction getNewDirection();
-
-	int getNewViewCoord();
+	void updateLevel(Level level);
 }

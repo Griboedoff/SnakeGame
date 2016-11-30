@@ -34,7 +34,7 @@ class PointTranslator
 		return pointTo2D(new Point3d(x, y, z), fieldVector);
 	}
 
-	public static Point3d directionToPoint3D(Direction direction, Point3d fieldVector)
+	static Point3d directionToPoint3D(Direction direction, Point3d fieldVector)
 	{
 		Point2d vector = direction.getVector();
 		if (fieldVector.getX() != -1)

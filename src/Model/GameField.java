@@ -21,22 +21,22 @@ public class GameField implements Serializable
 				field[x][y] = new EmptyCell();
 	}
 
-	public GameField(BaseCell[][] field)
+	GameField(BaseCell[][] field)
 	{
 		this.field = field;
 	}
 
-	public int getHeight()
+	int getHeight()
 	{
 		return field[0].length;
 	}
 
-	public int getWidth()
+	int getWidth()
 	{
 		return field.length;
 	}
 
-	public BaseCell getCell(int x, int y) throws IndexOutOfBoundsException
+	BaseCell getCell(int x, int y) throws IndexOutOfBoundsException
 	{
 		if (!isInField(x, y))
 			throw new IndexOutOfBoundsException();

@@ -29,12 +29,12 @@ public class Point3d implements Serializable
 		return y;
 	}
 
-	public int getZ()
+	int getZ()
 	{
 		return z;
 	}
 
-	public int getLength()
+	int getLength()
 	{
 		return abs(x) + abs(y) + abs(z);
 	}

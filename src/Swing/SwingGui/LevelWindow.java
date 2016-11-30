@@ -7,6 +7,7 @@ import Model.Level;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 
 class LevelWindow extends JFrame
 {
@@ -17,7 +18,7 @@ class LevelWindow extends JFrame
 
 	LevelWindow()
 	{
-		super("Snakr");
+		super("Snake");
 		panel = new JPanel()
 		{
 			@Override
@@ -40,12 +41,12 @@ class LevelWindow extends JFrame
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
-	public Level getLevel()
+	Level getLevel()
 	{
 		return level;
 	}
 
-	public void setLevel(Level level)
+	void setLevel(Level level)
 	{
 		this.level = level;
 		setSize(level.getFieldWidth() * CELL_SIZE, level.getFieldHeight() * CELL_SIZE);
@@ -71,5 +72,6 @@ class LevelWindow extends JFrame
 	void updateGameEnd()
 	{
 		JOptionPane.showMessageDialog(null, "Game Over", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 }
