@@ -1,16 +1,18 @@
 package Model.Cells;
 
-import Model.Point3d;
-import Model.Snake;
+//import Model.Point3d;
 import Model.Space;
+import Model.Snake;
+//import Model.Space;
+import Model.Vector;
 import Swing.SwingGui.SwingPainterVisitor;
 
 public class WallCell extends BaseCell
 {
 	@Override
-	public void affectSnake(Snake snake, Point3d fieldVector, Space space)
+	public void affectSnake(Snake snake, Vector fieldVector, Space space)
 	{
-		snake.setDead();
+		snake.die();
 	}
 
 	@Override

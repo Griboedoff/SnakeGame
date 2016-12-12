@@ -1,4 +1,4 @@
-package Model;
+/*package Model;
 
 import java.io.Serializable;
 
@@ -84,3 +84,4 @@ public class Point3d implements Serializable
 		return x > 0 && y > 0 && z > 0;
 	}
 }
+*/

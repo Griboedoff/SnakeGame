@@ -8,135 +8,73 @@ import java.util.HashMap;
 
 public class Space
 {
-	private final HashMap<Point3d, BaseCell> cells;
-	private final Point3d size;
+    private final HashMap<Vector, BaseCell> cells;
+    private final Vector size;
 
-	private Space(HashMap<Point3d, BaseCell> cells, Point3d size)
-	{
-		this.cells = cells;
-		this.size = size;
-	}
+    private Space(HashMap<Vector, BaseCell> cells, Vector size)
+    {
+        this.cells = cells;
+        this.size = size;
+    }
 
-	static Space getTestSpace()
-	{
-		HashMap<Point3d, BaseCell> cells = new HashMap<>();
-		int size = 20;
-		for (int i = 0; i < size; i++)
-		{
-			putWallWithOffset(cells, size, i, 3);
-			putWallWithOffset(cells, size, i, 1);
-		}
-		return new Space(cells, new Point3d(size, size, size));
-	}
+    public Vector getSize() { return size; }
+    public int getDim() { return size.getDim(); }
 
-	private static void putWallWithOffset(HashMap<Point3d, BaseCell> cells, int size, int i, int offset)
-	{
-		for (int j = 1; j < size; j += size - offset)
-			for (int k = 1; k < size; k += size - offset)
-				putWallInEveryCorner(cells, i, j, k);
-	}
+    public void setCell(Vector point, BaseCell cell)
+    {
+        if (!isInSpace(point))
+            throw new IllegalArgumentException();
+        if (cell instanceof EmptyCell && cells.containsKey(point))
+            cells.remove(point);
+        cells.put(point, cell);
+    }
 
-	private static void putWallInEveryCorner(HashMap<Point3d, BaseCell> cells, int i, int j, int k)
-	{
-		cells.put(new Point3d(i, j, k), new WallCell());
-		cells.put(new Point3d(j, i, k), new WallCell());
-		cells.put(new Point3d(j, k, i), new WallCell());
-	}
+    BaseCell getCell(Vector point) throws IllegalArgumentException
+    {
+        if (!isInSpace(point))
+            throw new IllegalArgumentException("Point " + point.toString() + " is outside space boundaries");
+        if (!cells.containsKey(point))
+            return new EmptyCell();
+        return cells.get(point);
+    }
 
-	GameField getSection(Point3d p)
-	{
-		if (p.getX() != -1)
-			return rotateX(p);
-		else if (p.getY() != -1)
-			return rotateY(p);
-		else
-			return rotateZ(p);
-	}
+    public GameField getSection(Vector pointIn, Vector fieldVector)
+    {
+        int[] res_size = new int[2];
+        for (int i = 0; i < 2; i++)
+            res_size[i] = size.getCoord(fieldVector.getCoord(i));
+        GameField res = new GameField(res_size[0], res_size[1]);
+        for (int i = 0; i < res_size[0]; i++)
+            for (int j = 0; j < res_size[1]; j++)
+                res.setCell(i, j, getCell(PointTranslator.point2dToVector(new Point2d(i, j), pointIn, fieldVector)));
+        return res;
+    }
 
-	private GameField rotateZ(Point3d p)
-	{
-		BaseCell[][] cells = new BaseCell[this.size.getX()][this.size.getY()];
-		for (int x = 0; x < cells.length; x++)
-			for (int y = 0; y < cells[0].length; y++)
-			{
-				if (this.cells.containsKey(new Point3d(x, y, p.getZ())))
-					cells[x][y] = this.cells.get(new Point3d(x, y, p.getZ()));
-				else
-					cells[x][y] = new EmptyCell();
-			}
-		return new GameField(cells);
-	}
+    public boolean isInSpace(Vector point)
+    {
+        for (int i = 0; i < getDim(); i++)
+            if (0 > point.getCoord(i) || point.getCoord(i) > size.getCoord(i))
+                return false;
+        return true;
+    }
 
-	private GameField rotateY(Point3d p)
-	{
-		BaseCell[][] cells = new BaseCell[this.size.getZ()][this.size.getX()];
-		for (int z = 0; z < cells.length; z++)
-			for (int x = 0; x < cells[0].length; x++)
-			{
-				if (this.cells.containsKey(new Point3d(x, p.getY(), z)))
-					cells[z][x] = this.cells.get(new Point3d(x, p.getY(), z));
-				else
-					cells[z][x] = new EmptyCell();
-			}
-		return new GameField(cells);
-	}
+    public void affectSnake(Snake snake, Vector fieldVector, Vector point)
+    {
+        if (isInSpace(point))
+            getCell(point).affectSnake(snake, fieldVector, this);
+        else
+            snake.die();
+    }
 
-	private GameField rotateX(Point3d p)
-	{
-		BaseCell[][] cells = new BaseCell[this.size.getY()][this.size.getZ()];
-		for (int y = 0; y < cells.length; y++)
-			for (int z = 0; z < cells[0].length; z++)
-			{
-				if (this.cells.containsKey(new Point3d(p.getX(), y, z)))
-					cells[y][z] = this.cells.get(new Point3d(p.getX(), y, z));
-				else
-					cells[y][z] = new EmptyCell();
-			}
-		return new GameField(cells);
-	}
-
-	boolean isInSpace(Point3d point)
-	{
-		return !(point.getX() < 0 || point.getX() >= size.getX()) &&
-				!(point.getY() < 0 || point.getY() >= size.getY()) &&
-				!(point.getZ() < 0 || point.getZ() >= size.getZ());
-	}
-
-	BaseCell getCell(Point3d point) throws IllegalArgumentException
-	{
-		if (!isInSpace(point))
-			throw new IllegalArgumentException("Point " + point.toString() + " is outside space boundaries");
-		if (!cells.containsKey(point))
-			return new EmptyCell();
-		return cells.get(point);
-	}
-
-	public BaseCell getCell(int x, int y, int z)
-	{
-		return getCell(new Point3d(x, y, z));
-	}
-
-	public void setCell(Point3d point, BaseCell cell)
-	{
-		if (!isInSpace(point))
-			throw new IllegalArgumentException();
-		if (cell instanceof EmptyCell && cells.containsKey(point))
-			cells.remove(point);
-		cells.put(point, cell);
-	}
-
-	public void setCell(int x, int y, int z, BaseCell cell)
-	{
-		setCell(new Point3d(x, y, z), cell);
-	}
-
-	int countEmptyCells()
-	{
-		return size.getX() * size.getY() * size.getZ() - cells.size();
-	}
-
-	Point3d getSize()
-	{
-		return size;
-	}
+    public static Space getTestSpace()
+    {
+        HashMap<Vector, BaseCell> cells = new HashMap<Vector, BaseCell>();
+        for (int i = 0; i < 20; i++){
+            cells.put(new Vector(new int[] {i, 1, 1}), new WallCell());
+            cells.put(new Vector(new int[] {1, i, 1}), new WallCell());
+            cells.put(new Vector(new int[] {1, 1, i}), new WallCell());
+            cells.put(new Vector(new int[] {i, 2, 2}), new WallCell());
+        }
+        return new Space(cells, new Vector(new int[] {20, 20, 20}));
+    }
 }

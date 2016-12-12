@@ -10,29 +10,26 @@ public class Snake implements Serializable
 
 	private SnakeCell head;
 	private SnakeCell tail;
-	private Point3d vectorDirection;
+	private Vector direction;
 	private int length;
 	private boolean isAlive;
 
-	Snake(int xHead, int yHead, int zHead, Point3d direction)
+	Snake(Vector location, Vector direction)
 	{
-		this(new Point3d(xHead, yHead, zHead), direction);
-	}
-
-	Snake(Point3d point, Point3d direction)
-	{
-		head = new SnakeCell(point);
+		head = new SnakeCell(location);
 		tail = head;
-		this.vectorDirection = direction;
+		this.direction = direction;
 		isAlive = true;
 	}
+
+	public Vector getLocation() { return head.getLocation(); }
 
 	boolean isAlive()
 	{
 		return isAlive;
 	}
 
-	public void setDead()
+	public void die()
 	{
 		isAlive = false;
 	}
@@ -42,22 +39,19 @@ public class Snake implements Serializable
 		return length;
 	}
 
-	public Point3d getVectorDirection()
+	public Vector getDirection() { return direction; }
+
+	public void setDirection(Vector direction)
 	{
-		return vectorDirection;
+		if (direction.getNorm() != 1)
+			throw new IllegalArgumentException("Direction must have norm 1");
+		if (!this.direction.add(direction).equals(Vector.getZero(direction.getDim())))
+			this.direction = direction;
 	}
 
-	void setVectorDirection(Point3d vectorDirection)
+	public void justSetDirection(Vector direction)
 	{
-		if (vectorDirection.getLength() != 1)
-			throw new IllegalArgumentException("Direction must have length 1");
-		if (!this.vectorDirection.add(vectorDirection).equals(new Point3d(0, 0, 0)))
-			this.vectorDirection = vectorDirection;
-	}
-
-	public void justSetDirection(Point3d direction)
-	{
-		this.vectorDirection = direction;
+		this.direction = direction;
 	}
 
 	public void justSetHead(SnakeCell newHead)
@@ -87,10 +81,7 @@ public class Snake implements Serializable
 		this.head = newHead;
 	}
 
-	public Point3d getNextMoveCell()
-	{
-		return head.getLocation().add(vectorDirection);
-	}
+	public Vector getNextMoveCell() { return head.getLocation().add(direction);	}
 
 	public void updateHead(SnakeCell newHead)
 	{

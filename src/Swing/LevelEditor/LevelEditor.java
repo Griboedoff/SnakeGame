@@ -1,11 +1,10 @@
-package Swing.LevelEditor;
+/*package Swing.LevelEditor;
 
 import Model.Cells.BaseCell;
 import Model.Cells.SnakeCell;
 import Model.Direction;
 import Model.GameField;
 import Model.Level;
-import Model.Point3d;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -27,7 +26,7 @@ public class LevelEditor
 	LevelEditor(Level level)
 	{
 		field = level.getField();
-		direction = level.getSnake().getVectorDirection();
+		direction = level.getSnake().getDirection();
 		name = level.getName();
 	}
 
@@ -121,4 +120,4 @@ public class LevelEditor
 			return "Amount of snakes must be equal to one";
 		return "OK";
 	}
-}
+}*/

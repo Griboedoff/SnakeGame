@@ -4,7 +4,6 @@ import Model.Cells.*;
 
 import java.util.Random;
 
-import static Model.PointTranslator.pointTo3D;
 
 public class Spawner
 {
@@ -12,25 +11,11 @@ public class Spawner
 
 	private static void spawn(Space space, BaseCell object)
 	{
-		int free_amount = space.countEmptyCells();
-		int foodCellNumber = random.nextInt(free_amount);
-		for (int z = 0; z < space.getSize().getZ(); z++)
-		{
-			GameField section = space.getSection(new Point3d(-1, -1, z));
-			int emptiesInSectionAmount = section.countEmptyCells();
-			if (foodCellNumber >= emptiesInSectionAmount)
-			{
-				foodCellNumber -= emptiesInSectionAmount;
-				continue;
-			}
-			spawnOnSection(space, new Point3d(-1, -1, z), object);
-			break;
-		}
 	}
 
-	public static void spawnOnSection(Space space, Point3d fieldVector, BaseCell object)
+	public static void spawnOnSection(Space space, Vector pointIn, Vector fieldVector, BaseCell object)
 	{
-		GameField section = space.getSection(fieldVector);
+		GameField section = space.getSection(pointIn, fieldVector);
 		int foodCellNumber = random.nextInt(section.countEmptyCells());
 		for (int i = 0; i < section.getHeight(); i++)
 			for (int j = 0; j < section.getWidth(); j++)
@@ -40,7 +25,7 @@ public class Spawner
 					foodCellNumber--;
 				if (foodCellNumber == 0)
 				{
-					space.setCell(pointTo3D(j, i, fieldVector), object);
+					space.setCell(PointTranslator.point2dToVector(new Point2d(j, i), pointIn, fieldVector), object);
 					return;
 				}
 			}

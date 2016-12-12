@@ -1,4 +1,4 @@
-package Swing.LevelEditor;
+/*package Swing.LevelEditor;
 
 import Infrastructure.LevelRepo;
 import Model.Cells.*;
@@ -201,3 +201,4 @@ public class Window extends JFrame
 		};
 	}
 }
+*/

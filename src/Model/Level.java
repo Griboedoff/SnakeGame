@@ -7,7 +7,6 @@ import Model.Cells.SnakeCell;
 import java.io.Serializable;
 import java.util.Random;
 
-import static Model.PointTranslator.directionToPoint3D;
 
 public class Level implements Serializable
 {
@@ -19,31 +18,21 @@ public class Level implements Serializable
 	private final Random random;
 	private final int magic;
 	private final Space space;
-	private Point3d fieldVector;
-	private int coordNum;
+	private Vector fieldVector;
 
-	public Level(String name, Point3d snakeP, Direction direction)
+	public Level(String name, Vector snakePosition, Vector snakeDirection, Space space)
 	{
 		this.name = name;
-		space = Space.getTestSpace();
-		fieldVector = new Point3d(-1, -1, snakeP.getZ());
-		coordNum = 2;
-		field = space.getSection(fieldVector);
-		snake = new Snake(snakeP, directionToPoint3D(direction, fieldVector));
+		this.space = space;
+		fieldVector = new Vector(new int[] {0, 1});
+		snake = new Snake(snakePosition, snakeDirection);
 		space.setCell(snake.getHead().getLocation(), snake.getHead());
-		Spawner.spawnOnSection(space, fieldVector, new FoodCell());
+		Spawner.spawnOnSection(space, snakePosition, fieldVector, new FoodCell());
+        field = space.getSection(snake.getLocation(), fieldVector);
 		random = new Random();
 		magic = 2;
 	}
 
-	/*
-	public static Level fromLevelEditor(LevelEditor editor) throws SnakeNotFoundException
-	{
-		return new Level(editor.getName(),
-				editor.getSnakeCoordinates(),
-				editor.getDirection());
-	}
-	*/
 	public GameField getField()
 	{
 		return field;
@@ -91,16 +80,13 @@ public class Level implements Serializable
 
 	public void tick(Direction direction)
 	{
-		field = space.getSection(fieldVector);
 		if (direction != null && direction != Direction.NONE)
-			snake.setVectorDirection(directionToPoint3D(direction, fieldVector));
-		Point3d nextPoint = snake.getNextMoveCell();
-		boolean inSpace = space.isInSpace(nextPoint);
-		if (inSpace)
-			space.getCell(nextPoint).affectSnake(snake, fieldVector, space);
-		isOver = !(inSpace && snake.isAlive());
+			snake.setDirection(PointTranslator.directionToVector(direction, fieldVector, space.getDim()));
+        space.affectSnake(snake, fieldVector, snake.getNextMoveCell());
+		isOver = !(snake.isAlive());
 		if (random.nextInt(magic) == 0)
 			Spawner.spawnRandom(space);
+        field = space.getSection(snake.getLocation(), fieldVector);
 	}
 
 	public String getName()
@@ -113,23 +99,20 @@ public class Level implements Serializable
 		this.name = name;
 	}
 
-	public void rotate(int coordNum) throws IllegalArgumentException
+	public void rotate(int[] coordNums) throws IllegalArgumentException
 	{
-		this.coordNum = coordNum;
-		Point3d snakeLocation = snake.getHead().getLocation();
-		switch (this.coordNum)
-		{
-			case 0:
-				fieldVector = new Point3d(snakeLocation.getX(), -1, -1);
-				break;
-			case 1:
-				fieldVector = new Point3d(-1, snakeLocation.getY(), -1);
-				break;
-			case 2:
-				fieldVector = new Point3d(-1, -1, snakeLocation.getZ());
-				break;
-			default:
-				throw new IllegalArgumentException("coordNum must be in {0, 1, 2}");
-		}
+		if (coordNums.length != 2)
+		    throw new IllegalArgumentException("Amount of coords must be 2");
+        for (int i = 0; i < 2; i++)
+            if (0 > coordNums[i] || coordNums[i] >= space.getDim())
+                throw new IllegalArgumentException("Numbers of coords not in space");
+        if (coordNums[0] == coordNums[1])
+            throw new IllegalArgumentException("Numbers of coords must be different");
+        fieldVector = new Vector(coordNums);
 	}
+
+	public static Level getTestLevel()
+    {
+        return new Level("Test", new Vector(new int[] {10, 10, 10}), new Vector(new int[] {0, 1, 0}), Space.getTestSpace());
+    }
 }

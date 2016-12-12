@@ -1,14 +1,16 @@
 package Model.Cells;
 
-import Model.Point3d;
-import Model.Snake;
 import Model.Space;
+//import Model.Point3d;
+import Model.Snake;
+//import Model.Space;
+import Model.Vector;
 import Swing.SwingGui.SwingPainterVisitor;
 
 public class EmptyCell extends BaseCell
 {
 	@Override
-	public void affectSnake(Snake snake, Point3d fieldVector, Space space)
+	public void affectSnake(Snake snake, Vector fieldVector, Space space)
 	{
 		SnakeCell newHead = new SnakeCell(snake.getNextMoveCell());
 		snake.updateHead(newHead);

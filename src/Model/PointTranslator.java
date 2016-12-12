@@ -2,47 +2,20 @@ package Model;
 
 class PointTranslator
 {
-	private static Point3d pointTo3D(Point2d point, Point3d fieldVector)
-	{
-		if (fieldVector.getX() != -1)
-			return new Point3d(fieldVector.getX(), point.getX(), point.getY());
-		if (fieldVector.getY() != -1)
-			return new Point3d(point.getY(), fieldVector.getY(), point.getX());
-		if (fieldVector.getZ() != -1)
-			return new Point3d(point.getX(), point.getY(), fieldVector.getZ());
-		throw new RuntimeException("Incorrect value of fieldVector");
-	}
+    public static Vector directionToVector(Direction direction, Vector fieldVector, int dim)
+    {
+        int[] res_value = new int[dim];
+        Point2d dirVector2d = direction.getVector();
+        res_value[fieldVector.getCoord(0)] = dirVector2d.getX();
+        res_value[fieldVector.getCoord(1)] = dirVector2d.getY();
+        return new Vector(res_value);
+    }
 
-	static Point3d pointTo3D(int x, int y, Point3d fieldVector)
-	{
-		return pointTo3D(new Point2d(x, y), fieldVector);
-	}
-
-	private static Point2d pointTo2D(Point3d point, Point3d fieldVector)
-	{
-		if (fieldVector.getX() != -1)
-			return new Point2d(point.getY(), point.getZ());
-		if (fieldVector.getY() != -1)
-			return new Point2d(point.getZ(), point.getX());
-		if (fieldVector.getZ() != -1)
-			return new Point2d(point.getX(), point.getY());
-		throw new RuntimeException("Incorrect value of fieldVector");
-	}
-
-	public static Point2d pointTo2D(int x, int y, int z, Point3d fieldVector)
-	{
-		return pointTo2D(new Point3d(x, y, z), fieldVector);
-	}
-
-	static Point3d directionToPoint3D(Direction direction, Point3d fieldVector)
-	{
-		Point2d vector = direction.getVector();
-		if (fieldVector.getX() != -1)
-			return new Point3d(0, vector.getX(), vector.getY());
-		if (fieldVector.getY() != -1)
-			return new Point3d(vector.getY(), 0, vector.getX());
-		if (fieldVector.getZ() != -1)
-			return new Point3d(vector.getX(), vector.getY(), 0);
-		throw new IllegalArgumentException("Incorrect fieldVector: " + fieldVector.toString());
-	}
+    public static Vector point2dToVector(Point2d point, Vector vectorIn, Vector fieldVector)
+    {
+        int[] res_value = vectorIn.getValue();
+        res_value[fieldVector.getCoord(0)] = point.getX();
+        res_value[fieldVector.getCoord(1)] = point.getY();
+        return new Vector(res_value);
+    }
 }

@@ -1,20 +1,23 @@
 package Model.Cells;
 
-import Model.Point3d;
-import Model.Snake;
 import Model.Space;
+//import Model.Point3d;
+import Model.Snake;
+//import Model.Space;
+//import Model.Spawner;
 import Model.Spawner;
+import Model.Vector;
 import Swing.SwingGui.SwingPainterVisitor;
 
 public class FoodCell extends BaseCell
 {
 	@Override
-	public void affectSnake(Snake snake, Point3d fieldVector, Space space)
+	public void affectSnake(Snake snake, Vector fieldVector, Space space)
 	{
 		SnakeCell newHead = new SnakeCell(snake.getNextMoveCell());
 		snake.updateHead(newHead);
 		space.setCell(newHead.getLocation(), newHead);
-		Spawner.spawnOnSection(space, fieldVector, new FoodCell());
+		Spawner.spawnOnSection(space, snake.getLocation(), fieldVector, new FoodCell());
 	}
 
 	@Override

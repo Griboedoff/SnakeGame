@@ -1,8 +1,10 @@
 package Model.Cells;
 
-import Model.Point3d;
-import Model.Snake;
 import Model.Space;
+//import Model.Point3d;
+import Model.Snake;
+//import Model.Space;
+import Model.Vector;
 import Swing.SwingGui.SwingPainterVisitor;
 
 import java.io.Serializable;
@@ -10,23 +12,23 @@ import java.io.Serializable;
 public abstract class BaseCell implements Serializable
 {
 	private static final long serialVersionUID = 213456783;
-	Point3d location;
+	Vector location;
 
 	BaseCell()
 	{
 	}
 
-	BaseCell(int x, int y, int z)
+	BaseCell(Vector location)
 	{
-		location = new Point3d(x, y, z);
+		this.location = location;
 	}
 
-	public Point3d getLocation()
+	public Vector getLocation()
 	{
 		return location;
 	}
 
-	public abstract void affectSnake(Snake snake, Point3d fieldVector, Space space);
+	public abstract void affectSnake(Snake snake, Vector fieldVector, Space space);
 
 	public abstract void acceptVisitor(SwingPainterVisitor v, int x, int y);
 

@@ -1,8 +1,10 @@
 package Model.Cells;
 
-import Model.Point3d;
-import Model.Snake;
 import Model.Space;
+//import Model.Point3d;
+import Model.Snake;
+//import Model.Space;
+import Model.Vector;
 import Swing.SwingGui.SwingPainterVisitor;
 
 public class SnakeCell extends BaseCell
@@ -10,7 +12,7 @@ public class SnakeCell extends BaseCell
 	private SnakeCell prev;
 	private SnakeCell next;
 
-	public SnakeCell(Point3d p)
+	public SnakeCell(Vector p)
 	{
 		location = p;
 	}
@@ -43,9 +45,9 @@ public class SnakeCell extends BaseCell
 	}
 
 	@Override
-	public void affectSnake(Snake snake, Point3d fieldVector, Space space)
+	public void affectSnake(Snake snake, Vector fieldVector, Space space)
 	{
-		snake.setDead();
+		snake.die();
 	}
 
 	@Override

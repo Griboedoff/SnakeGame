@@ -21,7 +21,7 @@ public class Engine
 
 	public void run() throws InterruptedException
 	{
-		currentLevel = new Level("Test", new Point3d(10, 10, 10), Direction.UP);
+		currentLevel = Level.getTestLevel();
 
 		while (!currentLevel.isOver())
 		{

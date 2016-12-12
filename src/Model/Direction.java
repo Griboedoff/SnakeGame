@@ -29,23 +29,6 @@ public enum Direction implements Serializable
 		reverseDirection.put(NONE, NONE);
 	}
 
-	public static Direction fromPoint(Point3d point) throws InvalidParameterException
-	{
-		int x = point.getX();
-		int y = point.getY();
-		if (x > 0 && y == 0)
-			return Direction.RIGHT;
-		if (x < 0 && y == 0)
-			return Direction.LEFT;
-		if (x == 0 && y > 0)
-			return Direction.UP;
-		if (x == 0 && y < 0)
-			return Direction.DOWN;
-		if (x == 0 && y == 0)
-			return Direction.NONE;
-		throw new InvalidParameterException("No direction for vector");
-	}
-
 	public static Direction fromString(Object selectedItem)
 	{
 		if (selectedItem instanceof String)
