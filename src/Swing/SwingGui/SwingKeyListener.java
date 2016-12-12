@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 class SwingKeyListener implements KeyListener
 {
 	private Direction currentDirection = Direction.NONE;
-	private int[] viewCoords = new int[] {0, 1};
+	private int[] viewCoordinates = new int[]{0, 1};
 
 	Direction getCurrentDirection()
 	{
@@ -17,9 +17,9 @@ class SwingKeyListener implements KeyListener
 		return currDir;
 	}
 
-	int[] getViewCoords()
+	int[] getViewCoordinates()
 	{
-		return viewCoords;
+		return viewCoordinates;
 	}
 
 	@Override
@@ -46,13 +46,13 @@ class SwingKeyListener implements KeyListener
 				currentDirection = Direction.LEFT;
 				break;
 			case (KeyEvent.VK_1):
-				viewCoords = new int[] {1, 2};
+				viewCoordinates = new int[]{1, 2};
 				break;
 			case (KeyEvent.VK_2):
-				viewCoords = new int[] {2, 0};
+				viewCoordinates = new int[]{2, 0};
 				break;
 			case (KeyEvent.VK_3):
-				viewCoords = new int[] {0, 1};
+				viewCoordinates = new int[]{0, 1};
 				break;
 			default:
 				break;

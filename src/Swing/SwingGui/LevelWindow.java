@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 
 class LevelWindow extends JFrame
 {
-	private static final int CELL_SIZE = 16;
+	static final int CELL_SIZE = 16;
 	final JPanel panel;
 	SwingKeyListener listener;
 	private Level level;
@@ -26,7 +26,7 @@ class LevelWindow extends JFrame
 			{
 				if (level != null)
 				{
-					SwingPainterVisitor v = new SwingPainterVisitor(g, CELL_SIZE);
+					SwingPainterVisitor v = new SwingPainterVisitor(g);
 					for (int x = 0; x < level.getFieldWidth(); x++)
 						for (int y = 0; y < level.getFieldHeight(); y++)
 						{

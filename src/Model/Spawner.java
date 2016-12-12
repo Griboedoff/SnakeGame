@@ -8,6 +8,7 @@ import java.util.Random;
 public class Spawner
 {
 	private static final Random random = new Random();
+	private static final BaseCell[] allCases = new BaseCell[]{new FoodCell(), new WallCell(), new PoisonCell(), new ReverseCell()};
 
 	private static void spawn(Space space, BaseCell object)
 	{
@@ -33,7 +34,6 @@ public class Spawner
 
 	static void spawnRandom(Space space)
 	{
-		BaseCell[] allCases = new BaseCell[]{new FoodCell(), new WallCell(), new PoisonCell(), new ReverseCell()};
 		for (int i = allCases.length; i > 0; i--)
 			if (random.nextInt(i) == 0)
 			{

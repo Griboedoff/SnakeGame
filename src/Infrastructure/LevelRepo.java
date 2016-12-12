@@ -49,7 +49,7 @@ public class LevelRepo
 		this.levelsDirectory = levelsDirectory;
 	}
 
-	public boolean saveLevelToFile(Level level)
+	public void saveLevelToFile(Level level)
 	{
 		String fileName = level.getName() + ".level";
 		Path path = Paths.get(levelsDirectory.getAbsolutePath(), fileName);
@@ -61,6 +61,5 @@ public class LevelRepo
 		{
 			throw new RuntimeException(e);
 		}
-		return true;
 	}
 }

@@ -8,13 +8,13 @@ public class Engine
 {
 	private final int defaultGameLownessMS = 200;
 	private final LevelRepo levelRepo;
-	private Level currentLevel;
 	private final IGameController gameController;
 	private final IRenderer renderer;
+	private Level currentLevel;
 
-	public Engine(String pathToLevelRepo, IGameController gameController, IRenderer renderer)
+	public Engine(IGameController gameController, IRenderer renderer)
 	{
-		levelRepo = new LevelRepo(pathToLevelRepo);
+		levelRepo = new LevelRepo("./Levels");
 		this.gameController = gameController;
 		this.renderer = renderer;
 	}
@@ -30,6 +30,6 @@ public class Engine
 			Thread.sleep(defaultGameLownessMS);
 		}
 
-		renderer.renderGameEnd(false);
+		renderer.renderGameEnd();
 	}
 }

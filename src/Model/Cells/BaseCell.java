@@ -1,13 +1,14 @@
 package Model.Cells;
 
-import Model.Space;
-//import Model.Point3d;
 import Model.Snake;
-//import Model.Space;
+import Model.Space;
 import Model.Vector;
 import Swing.SwingGui.SwingPainterVisitor;
 
 import java.io.Serializable;
+
+//import Model.Point3d;
+//import Model.Space;
 
 public abstract class BaseCell implements Serializable
 {
@@ -35,8 +36,10 @@ public abstract class BaseCell implements Serializable
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
 		BaseCell baseCell = (BaseCell) o;
 

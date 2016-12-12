@@ -20,7 +20,7 @@ class SwingGUI implements IRenderer, IGameController
 	@Override
 	public void updateLevel(Level level)
 	{
-		level.rotate(frame.listener.getViewCoords());
+		level.rotate(frame.listener.getViewCoordinates());
 		level.tick(frame.listener.getCurrentDirection());
 	}
 
@@ -39,7 +39,7 @@ class SwingGUI implements IRenderer, IGameController
 	}
 
 	@Override
-	public void renderGameEnd(boolean isCompleted)
+	public void renderGameEnd()
 	{
 		frame.updateGameEnd();
 	}

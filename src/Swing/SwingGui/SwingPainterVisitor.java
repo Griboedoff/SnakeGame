@@ -10,10 +10,10 @@ public class SwingPainterVisitor
 	private final Graphics graphics;
 	private final int cellSize;
 
-	public SwingPainterVisitor(Graphics graphics, int cellSize)
+	public SwingPainterVisitor(Graphics graphics)
 	{
 		this.graphics = graphics;
-		this.cellSize = cellSize;
+		this.cellSize = LevelWindow.CELL_SIZE;
 	}
 
 	public void visitEmptyCell(EmptyCell cell, int x, int y)
@@ -35,11 +35,6 @@ public class SwingPainterVisitor
 	{
 		drawCellWithBorder(new Color(150, 30, 90), x, y);
 	}
-
-//	public void visitPortalCell(PortalCell cell, int x, int y)
-//	{
-//		drawCellWithBorder(new Color(0, 0, 255), x, y);
-//	}
 
 	public void visitPoisonCell(PoisonCell cell, int x, int y)
 	{

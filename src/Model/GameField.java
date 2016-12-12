@@ -12,8 +12,7 @@ public class GameField implements Serializable
 
 	private final BaseCell[][] field;
 
-
-	public GameField(int width, int height)
+	GameField(int width, int height)
 	{
 		field = new BaseCell[width][height];
 		for (int x = 0; x < width; x++)
@@ -39,7 +38,7 @@ public class GameField implements Serializable
 	BaseCell getCell(int x, int y) throws IndexOutOfBoundsException
 	{
 		if (!isInField(x, y))
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException(String.format("x=%d y=%d", x, y));
 		return field[x][y];
 	}
 

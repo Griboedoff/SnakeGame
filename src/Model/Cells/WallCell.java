@@ -1,11 +1,13 @@
 package Model.Cells;
 
 //import Model.Point3d;
-import Model.Space;
+
 import Model.Snake;
-//import Model.Space;
+import Model.Space;
 import Model.Vector;
 import Swing.SwingGui.SwingPainterVisitor;
+
+//import Model.Space;
 
 public class WallCell extends BaseCell
 {

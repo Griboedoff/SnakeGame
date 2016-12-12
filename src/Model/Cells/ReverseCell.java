@@ -1,11 +1,12 @@
 package Model.Cells;
 
-import Model.Space;
-//import Model.Point3d;
 import Model.Snake;
-//import Model.Space;
+import Model.Space;
 import Model.Vector;
 import Swing.SwingGui.SwingPainterVisitor;
+
+//import Model.Point3d;
+//import Model.Space;
 
 public class ReverseCell extends BaseCell
 {
@@ -20,8 +21,7 @@ public class ReverseCell extends BaseCell
 		snake.updateHead(newHead);
 		space.setCell(newHead.getLocation(), newHead);
 
-		Vector newDirectionVector = snake.getTail().getLocation().sub(snake.getTail().getPrev().getLocation());
-		snake.justSetDirection(newDirectionVector);
+		snake.justSetDirection(snake.getTail().getLocation().sub(snake.getTail().getPrev().getLocation()));
 
 		SnakeCell cell = snake.getHead();
 		while (cell != null)

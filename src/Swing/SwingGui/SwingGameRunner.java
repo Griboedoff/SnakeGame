@@ -7,7 +7,7 @@ class SwingGameRunner
 	public static void main(String[] args)
 	{
 		SwingGUI gui = new SwingGUI();
-		Engine engine = new Engine("./Levels", gui, gui);
+		Engine engine = new Engine(gui, gui);
 		try
 		{
 			engine.run();

@@ -1,13 +1,14 @@
 package Model.Cells;
 
-import Model.Space;
-//import Model.Point3d;
 import Model.Snake;
-//import Model.Space;
-//import Model.Spawner;
+import Model.Space;
 import Model.Spawner;
 import Model.Vector;
 import Swing.SwingGui.SwingPainterVisitor;
+
+//import Model.Point3d;
+//import Model.Space;
+//import Model.Spawner;
 
 public class FoodCell extends BaseCell
 {

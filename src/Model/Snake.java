@@ -22,7 +22,10 @@ public class Snake implements Serializable
 		isAlive = true;
 	}
 
-	public Vector getLocation() { return head.getLocation(); }
+	public Vector getLocation()
+	{
+		return head.getLocation();
+	}
 
 	boolean isAlive()
 	{
@@ -39,9 +42,12 @@ public class Snake implements Serializable
 		return length;
 	}
 
-	public Vector getDirection() { return direction; }
+	public Vector getDirection()
+	{
+		return direction;
+	}
 
-	public void setDirection(Vector direction)
+	void setDirection(Vector direction)
 	{
 		if (direction.getNorm() != 1)
 			throw new IllegalArgumentException("Direction must have norm 1");
@@ -81,7 +87,10 @@ public class Snake implements Serializable
 		this.head = newHead;
 	}
 
-	public Vector getNextMoveCell() { return head.getLocation().add(direction);	}
+	public Vector getNextMoveCell()
+	{
+		return head.getLocation().add(direction);
+	}
 
 	public void updateHead(SnakeCell newHead)
 	{
