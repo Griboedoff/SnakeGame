@@ -50,7 +50,7 @@ public class Snake implements Serializable
 	void setDirection(Vector direction)
 	{
 		if (direction.getNorm() != 1)
-			throw new IllegalArgumentException("Direction must have norm 1");
+			throw new IllegalArgumentException("Direction must have norm 1" + direction);
 		if (!this.direction.add(direction).equals(Vector.getZero(direction.getDim())))
 			this.direction = direction;
 	}

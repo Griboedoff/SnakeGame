@@ -62,8 +62,7 @@ public class Vector
 	int getNorm()
 	{
 		return IntStream.range(0, getDim())
-				.map(i -> abs(getCoord(i)))
-				.sum();
+				.map(i -> abs(getCoord(i))).sum();
 	}
 
 	@Override
@@ -90,9 +89,9 @@ public class Vector
 
 	public String toString()
 	{
-		String res = "(";
+		String[] toJoin = new String[value.length];
 		for (int i = 0; i < getDim(); i++)
-			res += Integer.toString(value[i]) + ", ";
-		return res + ")";
+			toJoin[i] = Integer.toString(value[i]);
+		return "(" + String.join(", ", toJoin) + ")";
 	}
 }

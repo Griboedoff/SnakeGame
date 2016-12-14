@@ -26,15 +26,15 @@ public class ReverseCell extends BaseCell
 		SnakeCell cell = snake.getHead();
 		while (cell != null)
 		{
-			SnakeCell horse = cell.getNext();
+			SnakeCell temp = cell.getNext();
 			cell.setNext(cell.getPrev());
-			cell.setPrev(horse);
+			cell.setPrev(temp);
 			cell = cell.getPrev();
 		}
 
-		SnakeCell amazing = snake.getHead();
+		SnakeCell oldHead = snake.getHead();
 		snake.justSetHead(snake.getTail());
-		snake.setTail(amazing);
+		snake.setTail(oldHead);
 	}
 
 	@Override

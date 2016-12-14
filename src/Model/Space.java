@@ -59,15 +59,17 @@ public class Space
 		return cells.get(point);
 	}
 
-	GameField getSection(Vector pointIn, Vector fieldVector)
+	GameField getSection(Vector pointInSpace, Vector fieldVector)
 	{
 		int[] res_size = new int[2];
 		for (int i = 0; i < 2; i++)
 			res_size[i] = size.getCoord(fieldVector.getCoord(i));
+
 		GameField res = new GameField(res_size[0], res_size[1]);
 		for (int i = 0; i < res_size[0]; i++)
 			for (int j = 0; j < res_size[1]; j++)
-				res.setCell(i, j, getCell(PointTranslator.point2dToVector(new Point2d(i, j), pointIn, fieldVector)));
+				res.setCell(i, j, getCell(PointTranslator.point2dToVector(new Point2d(i, j), pointInSpace, fieldVector)));
+
 		return res;
 	}
 

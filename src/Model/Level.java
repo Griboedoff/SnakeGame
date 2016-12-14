@@ -106,13 +106,20 @@ public class Level implements Serializable
 
 	public void rotate(int[] coordinatesNumbers) throws IllegalArgumentException
 	{
-		if (coordinatesNumbers.length != 2)
-			throw new IllegalArgumentException("Amount of coordinates must be 2");
-		for (int i = 0; i < 2; i++)
-			if (0 > coordinatesNumbers[i] || coordinatesNumbers[i] >= space.getDim())
-				throw new IllegalArgumentException("Numbers of coordinates not in space");
-		if (coordinatesNumbers[0] == coordinatesNumbers[1])
-			throw new IllegalArgumentException("Numbers of coordinates must be different");
-		fieldVector = new Vector(coordinatesNumbers);
+		fieldVector = processCoordinates(coordinatesNumbers);
 	}
+
+	private Vector processCoordinates(int[] coordinatesNumbers)
+	{
+		Vector newFieldVector = fieldVector.add(new Vector(coordinatesNumbers));
+		if ((newFieldVector.getCoord(0) - newFieldVector.getCoord(1)) % space.getDim() == 0)
+			newFieldVector = newFieldVector.add(new Vector(coordinatesNumbers));
+
+		int[] resValue = newFieldVector.getValue();
+		for (int i = 0; i < resValue.length; i++)
+			resValue[i] = (resValue[i] + space.getDim()) % space.getDim();
+
+		return new Vector(resValue);
+	}
+
 }
